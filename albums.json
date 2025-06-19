@@ -1,0 +1,485 @@
+[
+  {
+    "artist": "Herb Alpert and the Tijuana Brass",
+    "album": "South of the Border",
+    "year": "1964",
+    "genre": "Easy Listening",
+    "funFact": "This album reached #6 on the Billboard 200 chart and stayed there for 122 weeks."
+  },
+  {
+    "artist": "Arctic Monkeys",
+    "album": "Arctic Monkeys",
+    "year": "2006",
+    "genre": "Indie Rock",
+    "funFact": "This debut EP by Arctic Monkeys was initially handed out for free at their early gigs."
+  },
+  {
+    "artist": "Bryan Adams",
+    "album": "Cuts Like a Knife",
+    "year": "1983",
+    "genre": "Rock",
+    "funFact": "This was Bryan Adams' breakthrough album, featuring his first Top 10 hit 'Straight From the Heart.'"
+  },
+  {
+    "artist": "Pat Benatar",
+    "album": "In the Heat of the Night",
+    "year": "1979",
+    "genre": "Rock",
+    "funFact": "This was Pat Benatar's debut album and contained her breakthrough hit 'Heartbreaker.'"
+  },
+  {
+    "artist": "Paul McCartney and Wings",
+    "album": "Band on the Run",
+    "year": "1973",
+    "genre": "Rock",
+    "funFact": "This album was partially recorded in Lagos, Nigeria, and is considered one of McCartney's finest post-Beatles works."
+  },
+  {
+    "artist": "Charlie Byrd",
+    "album": "Jazz Recital",
+    "year": "1957",
+    "genre": "Jazz",
+    "funFact": "Charlie Byrd was instrumental in introducing bossa nova to American audiences."
+  },
+  {
+    "artist": "David Bowie",
+    "album": "Let's Dance",
+    "year": "1983",
+    "genre": "Pop",
+    "funFact": "This album was produced by Nile Rodgers and contained three of Bowie's most successful singles."
+  },
+  {
+    "artist": "Blue Öyster Cult",
+    "album": "Blue Öyster Cult",
+    "year": "1972",
+    "genre": "Hard Rock",
+    "funFact": "The band's logo, the 'Cross of Cronos,' has become one of rock's most recognizable symbols."
+  },
+  {
+    "artist": "Dave Brubeck",
+    "album": "All the Things We Are",
+    "year": "1976",
+    "genre": "Jazz",
+    "funFact": "This album features an all-star lineup of jazz musicians from different generations."
+  },
+  {
+    "artist": "Johnny Cash",
+    "album": "The Fabulous Johnny Cash",
+    "year": "1958",
+    "genre": "Country",
+    "funFact": "This was Johnny Cash's third studio album and his first for Columbia Records."
+  },
+  {
+    "artist": "The Cars",
+    "album": "Shake It Up",
+    "year": "1981",
+    "genre": "New Wave",
+    "funFact": "The title track became one of The Cars' most recognizable hits."
+  },
+  {
+    "artist": "Nat King Cole",
+    "album": "Love Is the Thing",
+    "year": "1957",
+    "genre": "Jazz",
+    "funFact": "This album was arranged and conducted by Gordon Jenkins and is considered one of Cole's finest."
+  },
+  {
+    "artist": "Ray Conniff",
+    "album": "Concert in Rhythm",
+    "year": "1958",
+    "genre": "Easy Listening",
+    "funFact": "Ray Conniff was known for his unique vocal-instrumental style, often featuring a wordless chorus."
+  },
+  {
+    "artist": "Christopher Cross",
+    "album": "Christopher Cross",
+    "year": "1979",
+    "genre": "Soft Rock",
+    "funFact": "This debut album won five Grammy Awards, including Album of the Year."
+  },
+  {
+    "artist": "Carpenters",
+    "album": "Close to You",
+    "year": "1970",
+    "genre": "Pop",
+    "funFact": "This was the Carpenters' second studio album and their commercial breakthrough, featuring the hit title track."
+  },
+  {
+    "artist": "Neil Diamond",
+    "album": "Rainbow",
+    "year": "1973",
+    "genre": "Pop",
+    "funFact": "This album features Diamond's hit cover of 'Holly Holy,' originally from his 1969 album."
+  },
+  {
+    "artist": "Deep Purple",
+    "album": "Made in Japan",
+    "year": "1972",
+    "genre": "Hard Rock",
+    "funFact": "This live album is considered one of the greatest live rock albums of all time."
+  },
+  {
+    "artist": "Duke Ellington",
+    "album": "Duke Ellington Volume 3",
+    "year": "1950",
+    "genre": "Jazz",
+    "funFact": "Duke Ellington led his orchestra for over 50 years and composed thousands of songs."
+  },
+  {
+    "artist": "Electric Light Orchestra",
+    "album": "Out of the Blue",
+    "year": "1977",
+    "genre": "Rock",
+    "funFact": "This double album features some of ELO's biggest hits, including 'Mr. Blue Sky' and 'Turn to Stone.'"
+  },
+  {
+    "artist": "Fleetwood Mac",
+    "album": "Tusk",
+    "year": "1979",
+    "genre": "Rock",
+    "funFact": "'Tusk' was one of the most expensive rock albums ever made at the time, costing over $1 million to produce."
+  },
+  {
+    "artist": "Peter Frampton",
+    "album": "Frampton Comes Alive!",
+    "year": "1976",
+    "genre": "Rock",
+    "funFact": "This live double album became one of the best-selling live albums of all time."
+  },
+  {
+    "artist": "The Grass Roots",
+    "album": "Golden Grass: Their Greatest Hits",
+    "year": "1968",
+    "genre": "Rock",
+    "funFact": "The Grass Roots had 21 Hot 100 singles, including two that reached the Top 10."
+  },
+  {
+    "artist": "Genesis",
+    "album": "Three Sides Live",
+    "year": "1982",
+    "genre": "Progressive Rock",
+    "funFact": "Despite its name, only three sides of this double album were recorded live."
+  },
+  {
+    "artist": "Marvin Gaye",
+    "album": "A Tribute to the Great Nat King Cole",
+    "year": "1965",
+    "genre": "Soul",
+    "funFact": "This album showcases Marvin Gaye's versatility as a vocalist, paying homage to one of his early influences."
+  },
+  {
+    "artist": "Stan Getz and Charlie Byrd",
+    "album": "Jazz Samba",
+    "year": "1962",
+    "genre": "Bossa Nova",
+    "funFact": "This album is credited with launching the bossa nova craze in the United States."
+  },
+  {
+    "artist": "Various Artists",
+    "album": "Grease: The Original Soundtrack",
+    "year": "1978",
+    "genre": "Soundtrack",
+    "funFact": "This soundtrack album was one of the best-selling albums of 1978 and has sold over 28 million copies worldwide."
+  },
+  {
+    "artist": "Hall & Oates",
+    "album": "H2O",
+    "year": "1982",
+    "genre": "Pop",
+    "funFact": "This album contains the hit single 'Maneater,' which became Hall & Oates' most successful single."
+  },
+  {
+    "artist": "Heart",
+    "album": "Little Queen",
+    "year": "1977",
+    "genre": "Rock",
+    "funFact": "This album features Heart's hit 'Barracuda,' inspired by the band's anger at their record label."
+  },
+  {
+    "artist": "The Human League",
+    "album": "Dare",
+    "year": "1981",
+    "genre": "Synth-pop",
+    "funFact": "This album contains the hit single 'Don't You Want Me,' which became the band's biggest success."
+  },
+  {
+    "artist": "Huey Lewis and the News",
+    "album": "Sports",
+    "year": "1983",
+    "genre": "Rock",
+    "funFact": "This album produced four top 10 hit singles on the Billboard Hot 100 and was one of the biggest albums of 1984."
+  },
+  {
+    "artist": "Iron Maiden",
+    "album": "The Number of the Beast",
+    "year": "1982",
+    "genre": "Heavy Metal",
+    "funFact": "This album marked Bruce Dickinson's debut as Iron Maiden's lead vocalist and is considered one of the greatest heavy metal albums."
+  },
+  {
+    "artist": "Michael Jackson",
+    "album": "Thriller",
+    "year": "1982",
+    "genre": "Pop",
+    "funFact": "'Thriller' is the best-selling album of all time, with estimated sales of 66 million copies worldwide."
+  },
+  {
+    "artist": "Joe Jackson",
+    "album": "Night and Day",
+    "year": "1982",
+    "genre": "New Wave",
+    "funFact": "This album marked a shift towards a more sophisticated, jazz-influenced sound for Joe Jackson."
+  },
+  {
+    "artist": "Judas Priest",
+    "album": "Screaming for Vengeance",
+    "year": "1982",
+    "genre": "Heavy Metal",
+    "funFact": "This album contains Judas Priest's most well-known song, 'You've Got Another Thing Comin'."
+  },
+  {
+    "artist": "George Jones",
+    "album": "Jones Country",
+    "year": "1983",
+    "genre": "Country",
+    "funFact": "George Jones had more Top 40 hits than any other country artist, with 143 making the charts."
+  },
+  {
+    "artist": "Louis Armstrong",
+    "album": "Hello, Dolly!",
+    "year": "1964",
+    "genre": "Jazz",
+    "funFact": "The title track knocked The Beatles off the top of the charts, making Armstrong the oldest artist to have a #1 hit at that time."
+  },
+  {
+    "artist": "America",
+    "album": "History: America's Greatest Hits",
+    "year": "1975",
+    "genre": "Folk Rock",
+    "funFact": "This compilation album has been certified multi-platinum and remains one of the band's best-selling releases."
+  },
+  {
+    "artist": "The Four Tops",
+    "album": "Four Tops",
+    "year": "1965",
+    "genre": "Soul",
+    "funFact": "The Four Tops were one of Motown's most consistent hit-makers throughout the 1960s."
+  },
+  {
+    "artist": "Roberta Flack and Donny Hathaway",
+    "album": "Roberta Flack & Donny Hathaway",
+    "year": "1972",
+    "genre": "Soul",
+    "funFact": "This collaborative album features the hit duet 'Where Is the Love,' which won a Grammy Award."
+  },
+  {
+    "artist": "Kenny G",
+    "album": "Duotones",
+    "year": "1986",
+    "genre": "Smooth Jazz",
+    "funFact": "This album contains Kenny G's biggest hit 'Songbird' and launched him to international stardom."
+  },
+  {
+    "artist": "Billy Joel",
+    "album": "The Stranger",
+    "year": "1977",
+    "genre": "Rock",
+    "funFact": "This album features four top 25 hits and is considered Billy Joel's masterpiece."
+  },
+  {
+    "artist": "Elton John",
+    "album": "Greatest Hits",
+    "year": "1974",
+    "genre": "Pop",
+    "funFact": "This compilation spent 10 weeks at #1 on the Billboard 200 and has been certified Diamond."
+  },
+  {
+    "artist": "Journey",
+    "album": "Escape",
+    "year": "1981",
+    "genre": "Rock",
+    "funFact": "This album contains Journey's biggest hit 'Don't Stop Believin'' and was their most successful album."
+  },
+  {
+    "artist": "Kansas",
+    "album": "Leftoverture",
+    "year": "1976",
+    "genre": "Progressive Rock",
+    "funFact": "This album features 'Carry On Wayward Son,' which became Kansas' signature song."
+  },
+  {
+    "artist": "Led Zeppelin",
+    "album": "Led Zeppelin IV",
+    "year": "1971",
+    "genre": "Hard Rock",
+    "funFact": "This untitled album contains 'Stairway to Heaven' and is considered one of the greatest rock albums ever."
+  },
+  {
+    "artist": "John Lennon",
+    "album": "Imagine",
+    "year": "1971",
+    "genre": "Rock",
+    "funFact": "The title track 'Imagine' is considered one of the greatest songs of all time and an anthem for peace."
+  },
+  {
+    "artist": "Madonna",
+    "album": "Like a Virgin",
+    "year": "1984",
+    "genre": "Pop",
+    "funFact": "This album established Madonna as a pop icon and contains several of her biggest hits."
+  },
+  {
+    "artist": "Bob Marley and the Wailers",
+    "album": "Legend",
+    "year": "1984",
+    "genre": "Reggae",
+    "funFact": "This greatest hits compilation is the best-selling reggae album of all time."
+  },
+  {
+    "artist": "Paul McCartney",
+    "album": "McCartney II",
+    "year": "1980",
+    "genre": "Rock",
+    "funFact": "This was McCartney's second solo album and featured him playing all instruments himself."
+  },
+  {
+    "artist": "Don McLean",
+    "album": "American Pie",
+    "year": "1971",
+    "genre": "Folk Rock",
+    "funFact": "The title track is over 8 minutes long and references 'the day the music died' - the plane crash that killed Buddy Holly."
+  },
+  {
+    "artist": "Steve Miller Band",
+    "album": "Book of Dreams",
+    "year": "1977",
+    "genre": "Rock",
+    "funFact": "This album contains the hit 'Jet Airliner' and was recorded at the same time as 'Fly Like an Eagle.'"
+  },
+  {
+    "artist": "Joni Mitchell",
+    "album": "Court and Spark",
+    "year": "1974",
+    "genre": "Folk Rock",
+    "funFact": "This album marked Mitchell's move toward a more jazz-influenced sound and was her most commercially successful."
+  },
+  {
+    "artist": "The Moody Blues",
+    "album": "Days of Future Passed",
+    "year": "1967",
+    "genre": "Progressive Rock",
+    "funFact": "This concept album was one of the first to combine rock with a full orchestra."
+  },
+  {
+    "artist": "Willie Nelson",
+    "album": "Red Headed Stranger",
+    "year": "1975",
+    "genre": "Country",
+    "funFact": "This sparse, acoustic concept album revitalized Nelson's career and helped define outlaw country."
+  },
+  {
+    "artist": "Stevie Nicks",
+    "album": "Bella Donna",
+    "year": "1981",
+    "genre": "Rock",
+    "funFact": "This was Nicks' debut solo album while still a member of Fleetwood Mac, and it went to #1."
+  },
+  {
+    "artist": "Ozzy Osbourne",
+    "album": "Blizzard of Ozz",
+    "year": "1980",
+    "genre": "Heavy Metal",
+    "funFact": "This debut solo album launched Ozzy's solo career and features guitarist Randy Rhoads."
+  },
+  {
+    "artist": "Pink Floyd",
+    "album": "The Wall",
+    "year": "1979",
+    "genre": "Progressive Rock",
+    "funFact": "This rock opera concept album is one of the best-selling albums of all time and was adapted into a film."
+  },
+  {
+    "artist": "Elvis Presley",
+    "album": "Elvis' Golden Records",
+    "year": "1958",
+    "genre": "Rock and Roll",
+    "funFact": "This compilation contains many of Elvis' early hits that helped establish rock and roll."
+  },
+  {
+    "artist": "Queen",
+    "album": "A Night at the Opera",
+    "year": "1975",
+    "genre": "Rock",
+    "funFact": "This album contains 'Bohemian Rhapsody,' Queen's most famous song and a revolutionary music video."
+  },
+  {
+    "artist": "Linda Ronstadt",
+    "album": "Heart Like a Wheel",
+    "year": "1974",
+    "genre": "Country Rock",
+    "funFact": "This album was Ronstadt's breakthrough and established her as one of the top female vocalists of the 1970s."
+  },
+  {
+    "artist": "Simon and Garfunkel",
+    "album": "Bridge Over Troubled Water",
+    "year": "1970",
+    "genre": "Folk Rock",
+    "funFact": "This was the duo's final studio album and won multiple Grammy Awards including Album of the Year."
+  },
+  {
+    "artist": "Bruce Springsteen",
+    "album": "Born to Run",
+    "year": "1975",
+    "genre": "Rock",
+    "funFact": "This breakthrough album established Springsteen as a major artist and features his signature sound."
+  },
+  {
+    "artist": "Steely Dan",
+    "album": "Aja",
+    "year": "1977",
+    "genre": "Jazz Rock",
+    "funFact": "This album is considered Steely Dan's masterpiece and features some of the finest session musicians."
+  },
+  {
+    "artist": "Cat Stevens",
+    "album": "Tea for the Tillerman",
+    "year": "1970",
+    "genre": "Folk Rock",
+    "funFact": "This album contains several of Stevens' most beloved songs including 'Wild World' and 'Father and Son.'"
+  },
+  {
+    "artist": "Donna Summer",
+    "album": "Bad Girls",
+    "year": "1979",
+    "genre": "Disco",
+    "funFact": "This double album was Summer's most successful and helped define the disco era."
+  },
+  {
+    "artist": "James Taylor",
+    "album": "Sweet Baby James",
+    "year": "1970",
+    "genre": "Folk Rock",
+    "funFact": "This album established Taylor as a leading singer-songwriter and contains his hit 'Fire and Rain.'"
+  },
+  {
+    "artist": "The Who",
+    "album": "Who's Next",
+    "year": "1971",
+    "genre": "Rock",
+    "funFact": "This album features some of The Who's biggest hits including 'Baba O'Riley' and 'Won't Get Fooled Again.'"
+  },
+  {
+    "artist": "Yes",
+    "album": "Fragile",
+    "year": "1971",
+    "genre": "Progressive Rock",
+    "funFact": "This album features the hit 'Roundabout' and showcased each band member's individual talents."
+  },
+  {
+    "artist": "Neil Young",
+    "album": "Harvest",
+    "year": "1972",
+    "genre": "Folk Rock",
+    "funFact": "This album contains Young's biggest hit 'Heart of Gold' and was his most commercially successful."
+  }
+]
