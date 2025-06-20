@@ -729,6 +729,23 @@
             let score = 0;
             const prefs = userPreferences;
 
+            // Era matching (stronger weighting and proper filtering)
+            const year = parseInt(album.year) || 1970;
+            if (prefs.era === 'classic' && year >= 1950 && year <= 1969) {
+                score += 5; // Higher weight for era matching
+            } else if (prefs.era === 'golden' && year >= 1970 && year <= 1979) {
+                score += 5;
+            } else if (prefs.era === 'modern' && year >= 1980) {
+                score += 5;
+            } else if (prefs.era === 'timeless') {
+                score += 2; // Moderate bonus for timeless
+            } else {
+                // Penalty for wrong era (unless timeless)
+                if (prefs.era !== 'timeless') {
+                    score -= 2;
+                }
+            }
+
             // Genre matching
             if (prefs.genre !== 'surprise') {
                 const genreMap = {
@@ -746,13 +763,6 @@
             } else {
                 score += 1; // Small bonus for surprise selection
             }
-
-            // Era matching
-            const year = parseInt(album.year) || 1970;
-            if (prefs.era === 'classic' && year >= 1950 && year <= 1969) score += 2;
-            if (prefs.era === 'golden' && year >= 1970 && year <= 1979) score += 2;
-            if (prefs.era === 'modern' && year >= 1980) score += 2;
-            if (prefs.era === 'timeless') score += 1;
 
             // Mood matching
             const moodMap = {
@@ -773,8 +783,8 @@
                 score += 1;
             }
 
-            // Add some randomness for variety
-            score += Math.random() * 0.5;
+            // Add some randomness for variety (but less than era/genre importance)
+            score += Math.random() * 0.3;
 
             return score;
         }
