@@ -327,22 +327,36 @@
         // Load vinyl collection from JSON file
         async function loadVinylCollection() {
             try {
-                const response = await fetch('albums.json');
+                console.log('Attempting to load albums.json...');
+                const response = await fetch('./albums.json');
+                console.log('Fetch response:', response);
+                
                 if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
+                    throw new Error(`HTTP error! status: ${response.status} - ${response.statusText}`);
                 }
+                
                 const data = await response.json();
+                console.log('Raw JSON data:', data);
+                
+                if (!Array.isArray(data)) {
+                    throw new Error('JSON data is not an array');
+                }
+                
                 vinylCollection = data;
                 
                 // Hide loading, show questionnaire
                 document.getElementById('loading').classList.add('hidden');
                 document.getElementById('questionnaire').classList.remove('hidden');
                 
-                console.log(`Loaded ${vinylCollection.length} albums from albums.json`);
+                console.log(`Successfully loaded ${vinylCollection.length} albums from albums.json`);
             } catch (error) {
-                console.error('Error loading vinyl collection:', error);
+                console.error('Detailed error loading vinyl collection:', error);
                 document.getElementById('loading').classList.add('hidden');
-                document.getElementById('error').classList.remove('hidden');
+                
+                // Show more detailed error message
+                const errorDiv = document.getElementById('error');
+                errorDiv.innerHTML = `❌ Error loading vinyl collection: ${error.message}<br><br>Please check the browser console for more details.`;
+                errorDiv.classList.remove('hidden');
             }
         }
 
