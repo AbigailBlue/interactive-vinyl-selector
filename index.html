@@ -80,6 +80,24 @@
             font-style: italic;
         }
 
+        .loading {
+            text-align: center;
+            font-size: 1.2em;
+            color: #f4d03f;
+            margin: 50px 0;
+        }
+
+        .error {
+            text-align: center;
+            font-size: 1.1em;
+            color: #ff6b6b;
+            background: rgba(255, 107, 107, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 30px 0;
+            border: 1px solid rgba(255, 107, 107, 0.3);
+        }
+
         .question-card {
             background: rgba(255,255,255,0.1);
             border-radius: 15px;
@@ -237,7 +255,15 @@
             <p class="subtitle">Find the perfect album for your mood</p>
         </div>
 
-        <div id="questionnaire">
+        <div id="loading" class="loading">
+            🎵 Loading vinyl collection...
+        </div>
+
+        <div id="error" class="error hidden">
+            ❌ Sorry, there was an error loading the vinyl collection. Please make sure the albums.json file is available.
+        </div>
+
+        <div id="questionnaire" class="hidden">
             <div class="question-card">
                 <div class="question">What's your current mood?</div>
                 <div class="options">
@@ -294,50 +320,36 @@
     </div>
 
     <script>
-        // Vinyl collection data
-        const vinylCollection = [
-            {artist: "Herb Alpert and the Tijuana Brass", album: "South of the Border", year: "1964", genre: "Easy Listening/Pop", funFact: "This album reached #6 on the Billboard 200 chart and stayed there for 122 weeks."},
-            {artist: "Arctic Monkeys", album: "Arctic Monkeys", year: "2006", genre: "Indie Rock", funFact: "This debut EP by Arctic Monkeys was initially handed out for free at their early gigs."},
-            {artist: "Bryan Adams", album: "Cuts Like a Knife", year: "1983", genre: "Rock", funFact: "This was Bryan Adams' breakthrough album, featuring his first Top 10 hit 'Straight From the Heart.'"},
-            {artist: "Pat Benatar", album: "In the Heat of the Night", year: "1979", genre: "Rock", funFact: "This was Pat Benatar's debut album and contained her breakthrough hit 'Heartbreaker.'"},
-            {artist: "Paul McCartney and Wings", album: "Band on the Run", year: "1973", genre: "Rock", funFact: "This album was partially recorded in Lagos, Nigeria, and is considered one of McCartney's finest post-Beatles works."},
-            {artist: "Charlie Byrd", album: "Jazz Recital", year: "1957", genre: "Jazz", funFact: "Charlie Byrd was instrumental in introducing bossa nova to American audiences."},
-            {artist: "David Bowie", album: "Let's Dance", year: "1983", genre: "Pop/Rock", funFact: "This album was produced by Nile Rodgers and contained three of Bowie's most successful singles."},
-            {artist: "Blue Öyster Cult", album: "Blue Öyster Cult", year: "1972", genre: "Hard Rock", funFact: "The band's logo, the 'Cross of Cronos,' has become one of rock's most recognizable symbols."},
-            {artist: "Dave Brubeck et al.", album: "All the Things We Are", year: "1976", genre: "Jazz", funFact: "This album features an all-star lineup of jazz musicians from different generations."},
-            {artist: "Johnny Cash", album: "The Fabulous Johnny Cash", year: "1958", genre: "Country", funFact: "This was Johnny Cash's third studio album and his first for Columbia Records."},
-            {artist: "The Cars", album: "Shake It Up", year: "1981", genre: "New Wave/Rock", funFact: "The title track became one of The Cars' most recognizable hits."},
-            {artist: "Nat King Cole", album: "Love Is the Thing", year: "1957", genre: "Vocal Jazz", funFact: "This album was arranged and conducted by Gordon Jenkins and is considered one of Cole's finest."},
-            {artist: "Ray Conniff", album: "Concert in Rhythm", year: "1958", genre: "Easy Listening", funFact: "Ray Conniff was known for his unique vocal-instrumental style, often featuring a wordless chorus."},
-            {artist: "Christopher Cross", album: "Christopher Cross", year: "1979", genre: "Soft Rock", funFact: "This debut album won five Grammy Awards, including Album of the Year."},
-            {artist: "Carpenters", album: "Close to You", year: "1970", genre: "Pop", funFact: "This was the Carpenters' second studio album and their commercial breakthrough, featuring the hit title track."},
-            {artist: "Neil Diamond", album: "Rainbow", year: "1973", genre: "Pop/Rock", funFact: "This album features Diamond's hit cover of 'Holly Holy,' originally from his 1969 album."},
-            {artist: "Deep Purple", album: "Made in Japan", year: "1972", genre: "Hard Rock", funFact: "This live album is considered one of the greatest live rock albums of all time."},
-            {artist: "Duke Ellington", album: "Duke Ellington Volume 3", year: "Unknown", genre: "Jazz", funFact: "Duke Ellington led his orchestra for over 50 years and composed thousands of songs."},
-            {artist: "Electric Light Orchestra", album: "Out of the Blue", year: "1977", genre: "Rock/Pop", funFact: "This double album features some of ELO's biggest hits, including 'Mr. Blue Sky' and 'Turn to Stone.'"},
-            {artist: "Fleetwood Mac", album: "Tusk", year: "1979", genre: "Rock", funFact: "'Tusk' was one of the most expensive rock albums ever made at the time, costing over $1 million to produce."},
-            {artist: "Peter Frampton", album: "Frampton Comes Alive!", year: "1976", genre: "Rock", funFact: "This live double album became one of the best-selling live albums of all time."},
-            {artist: "The Grass Roots", album: "Golden Grass: Their Greatest Hits", year: "1968", genre: "Rock/Pop", funFact: "The Grass Roots had 21 Hot 100 singles, including two that reached the Top 10."},
-            {artist: "Genesis", album: "Three Sides Live", year: "1982", genre: "Progressive Rock", funFact: "Despite its name, only three sides of this double album were recorded live."},
-            {artist: "Marvin Gaye", album: "A Tribute to the Great Nat King Cole", year: "1965", genre: "Soul/Jazz", funFact: "This album showcases Marvin Gaye's versatility as a vocalist, paying homage to one of his early influences."},
-            {artist: "Stan Getz and Charlie Byrd", album: "Jazz Samba", year: "1962", genre: "Jazz/Bossa Nova", funFact: "This album is credited with launching the bossa nova craze in the United States."},
-            {artist: "Various Artists", album: "Grease: The Original Soundtrack", year: "1978", genre: "Soundtrack/Rock & Roll", funFact: "This soundtrack album was one of the best-selling albums of 1978 and has sold over 28 million copies worldwide."},
-            {artist: "Hall & Oates", album: "H2O", year: "1982", genre: "Rock/Pop", funFact: "This album contains the hit single 'Maneater,' which became Hall & Oates' most successful single."},
-            {artist: "Heart", album: "Little Queen", year: "1977", genre: "Rock", funFact: "This album features Heart's hit 'Barracuda,' inspired by the band's anger at their record label."},
-            {artist: "The Human League", album: "Dare", year: "1981", genre: "Synth-pop", funFact: "This album contains the hit single 'Don't You Want Me,' which became the band's biggest success."},
-            {artist: "Huey Lewis and the News", album: "Sports", year: "1983", genre: "Rock", funFact: "This album produced four top 10 hit singles on the Billboard Hot 100 and was one of the biggest albums of 1984."},
-            {artist: "Iron Maiden", album: "The Number of the Beast", year: "1982", genre: "Heavy Metal", funFact: "This album marked Bruce Dickinson's debut as Iron Maiden's lead vocalist and is considered one of the greatest heavy metal albums."},
-            {artist: "Michael Jackson", album: "Thriller", year: "1982", genre: "Pop/R&B", funFact: "'Thriller' is the best-selling album of all time, with estimated sales of 66 million copies worldwide."},
-            {artist: "Joe Jackson", album: "Night and Day", year: "1982", genre: "New Wave/Pop", funFact: "This album marked a shift towards a more sophisticated, jazz-influenced sound for Joe Jackson."},
-            {artist: "Judas Priest", album: "Screaming for Vengeance", year: "1982", genre: "Heavy Metal", funFact: "This album contains Judas Priest's most well-known song, 'You've Got Another Thing Comin'."},
-            {artist: "George Jones", album: "Jones Country", year: "1983", genre: "Country", funFact: "George Jones had more Top 40 hits than any other country artist, with 143 making the charts."},
-            {artist: "Louis Armstrong", album: "Hello, Dolly!", year: "1964", genre: "Jazz/Pop", funFact: "The title track knocked The Beatles off the top of the charts, making Armstrong the oldest artist to have a #1 hit at that time."},
-            {artist: "America", album: "History: America's Greatest Hits", year: "1975", genre: "Folk Rock", funFact: "This compilation album has been certified multi-platinum and remains one of the band's best-selling releases."},
-            {artist: "The Four Tops", album: "Four Tops", year: "1965", genre: "R&B/Soul", funFact: "The Four Tops were one of Motown's most consistent hit-makers throughout the 1960s."},
-            {artist: "Roberta Flack and Donny Hathaway", album: "Roberta Flack & Donny Hathaway", year: "1972", genre: "Soul/R&B", funFact: "This collaborative album features the hit duet 'Where Is the Love,' which won a Grammy Award."}
-        ];
-
+        // Global variables
+        let vinylCollection = [];
         let userPreferences = {};
+
+        // Load vinyl collection from JSON file
+        async function loadVinylCollection() {
+            try {
+                const response = await fetch('albums.json');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+                vinylCollection = data;
+                
+                // Hide loading, show questionnaire
+                document.getElementById('loading').classList.add('hidden');
+                document.getElementById('questionnaire').classList.remove('hidden');
+                
+                console.log(`Loaded ${vinylCollection.length} albums from albums.json`);
+            } catch (error) {
+                console.error('Error loading vinyl collection:', error);
+                document.getElementById('loading').classList.add('hidden');
+                document.getElementById('error').classList.remove('hidden');
+            }
+        }
+
+        // Initialize the app when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            loadVinylCollection();
+        });
 
         // Handle option selection
         document.addEventListener('click', function(e) {
@@ -374,6 +386,11 @@
         }
 
         function getRecommendations() {
+            if (vinylCollection.length === 0) {
+                alert('Vinyl collection not loaded yet. Please try again.');
+                return;
+            }
+            
             const recommendations = findMatches();
             displayRecommendations(recommendations);
         }
@@ -396,11 +413,11 @@
             // Genre matching
             if (prefs.genre !== 'surprise') {
                 const genreMap = {
-                    'rock': ['Rock', 'Hard Rock', 'Progressive Rock', 'Indie Rock', 'New Wave'],
-                    'jazz': ['Jazz', 'Vocal Jazz', 'Bossa Nova', 'Blues'],
-                    'pop': ['Pop', 'Easy Listening', 'Soft Rock', 'Synth-pop'],
-                    'country': ['Country', 'Folk Rock', 'Folk'],
-                    'soul': ['Soul', 'R&B', 'Soul/R&B', 'Soul/Jazz']
+                    'rock': ['Rock', 'Hard Rock', 'Progressive Rock', 'Indie Rock', 'New Wave', 'Heavy Metal', 'Soft Rock'],
+                    'jazz': ['Jazz', 'Vocal Jazz', 'Bossa Nova', 'Blues', 'Big Band', 'Swing', 'Latin Jazz'],
+                    'pop': ['Pop', 'Easy Listening', 'Soft Rock', 'Synth-pop', 'Dance', 'Disco'],
+                    'country': ['Country', 'Folk Rock', 'Folk', 'Gospel'],
+                    'soul': ['Soul', 'R&B', 'Soul/R&B', 'Soul/Jazz', 'Calypso', 'Motown']
                 };
                 
                 const targetGenres = genreMap[prefs.genre] || [];
@@ -420,10 +437,10 @@
 
             // Mood matching
             const moodMap = {
-                'energetic': ['Rock', 'Hard Rock', 'Heavy Metal', 'Disco', 'Pop'],
-                'relaxed': ['Easy Listening', 'Jazz', 'Vocal Jazz', 'Soft Rock'],
-                'nostalgic': ['Classic', 'Vocal', 'Country', 'Folk'],
-                'adventurous': ['Progressive', 'Experimental', 'Synth-pop', 'New Wave']
+                'energetic': ['Rock', 'Hard Rock', 'Heavy Metal', 'Disco', 'Pop', 'Dance', 'New Wave'],
+                'relaxed': ['Easy Listening', 'Jazz', 'Vocal Jazz', 'Soft Rock', 'Orchestral', 'Hawaiian'],
+                'nostalgic': ['Country', 'Folk', 'Gospel', 'Big Band', 'Swing', 'Vocal'],
+                'adventurous': ['Progressive', 'Experimental', 'Synth-pop', 'New Wave', 'Psychedelic', 'Latin']
             };
 
             const moodGenres = moodMap[prefs.mood] || [];
@@ -431,8 +448,13 @@
                 score += 2;
             }
 
-            // Familiarity bonus
-            const popularArtists = ['Michael Jackson', 'The Beatles', 'Fleetwood Mac', 'Heart', 'Hall & Oates'];
+            // Familiarity bonus - look for well-known artists
+            const popularArtists = [
+                'Michael Jackson', 'Heart', 'Hall & Oates', 'Fleetwood Mac', 'Iron Maiden',
+                'David Bowie', 'Electric Light Orchestra', 'Genesis', 'Deep Purple', 'The Cars',
+                'Huey Lewis and the News', 'Peter Frampton', 'Johnny Cash', 'Louis Armstrong',
+                'Carpenters', 'Neil Diamond', 'Bryan Adams', 'Pat Benatar'
+            ];
             if (prefs.familiarity === 'familiar' && popularArtists.some(a => album.artist.includes(a))) {
                 score += 1;
             }
