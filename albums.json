@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "artist": "Al Hirt",
+    "album": "Soul in the Horn",
+    "year": "1967",
+    "genre": "Jazz/Soul",
+    "funFact": "Al Hirt was known as \"The King of Bourbon Street\" and was famous for his trumpet playing."
+  },
+  {
+    "id": 2,
+    "artist": "America",
+    "album": "America",
+    "year": "1971",
+    "genre": "Folk Rock",
+    "funFact": "The band's name was chosen to avoid confusion over their British origins when performing in the US."
+  },
+  {
+    "id": 3,
+    "artist": "America",
+    "album": "History: America's Greatest Hits",
+    "year": "1975",
+    "genre": "Folk Rock",
+    "funFact": "This compilation album has been certified multi-platinum and remains one of the band's best-selling releases."
+  },
+  {
+    "id": 4,
+    "artist": "Anita Bryant",
+    "album": "Mine Eyes Have Seen the Glory",
+    "year": "1964",
+    "genre": "Gospel",
+    "funFact": "Anita Bryant was a singer and beauty pageant winner who later became known for her political activism."
+  },
+  {
+    "id": 5,
+    "artist": "Arctic Monkeys",
+    "album": "Arctic Monkeys",
+    "year": "2006",
+    "genre": "Indie Rock",
+    "funFact": "This debut EP by Arctic Monkeys was initially handed out for free at their early gigs."
+  }
+]
