@@ -1,42 +1,1130 @@
 [
-  {
-    "id": 1,
-    "artist": "Al Hirt",
-    "album": "Soul in the Horn",
-    "year": "1967",
-    "genre": "Jazz/Soul",
-    "funFact": "Al Hirt was known as \"The King of Bourbon Street\" and was famous for his trumpet playing."
-  },
-  {
-    "id": 2,
-    "artist": "America",
-    "album": "America",
-    "year": "1971",
-    "genre": "Folk Rock",
-    "funFact": "The band's name was chosen to avoid confusion over their British origins when performing in the US."
-  },
-  {
-    "id": 3,
-    "artist": "America",
-    "album": "History: America's Greatest Hits",
-    "year": "1975",
-    "genre": "Folk Rock",
-    "funFact": "This compilation album has been certified multi-platinum and remains one of the band's best-selling releases."
-  },
-  {
-    "id": 4,
-    "artist": "Anita Bryant",
-    "album": "Mine Eyes Have Seen the Glory",
-    "year": "1964",
-    "genre": "Gospel",
-    "funFact": "Anita Bryant was a singer and beauty pageant winner who later became known for her political activism."
-  },
-  {
-    "id": 5,
-    "artist": "Arctic Monkeys",
-    "album": "Arctic Monkeys",
-    "year": "2006",
-    "genre": "Indie Rock",
-    "funFact": "This debut EP by Arctic Monkeys was initially handed out for free at their early gigs."
-  }
+    {
+        "id":  1,
+        "artist":  "Al Hirt",
+        "album":  "Soul in the Horn",
+        "year":  "1967",
+        "genre":  "Jazz/Soul",
+        "funFact":  "Al Hirt was known as \"The King of Bourbon Street\" and was famous for his trumpet playing."
+    },
+    {
+        "id":  2,
+        "artist":  "America",
+        "album":  "America",
+        "year":  "1971",
+        "genre":  "Folk Rock",
+        "funFact":  "The band\u0027s name was chosen to avoid confusion over their British origins when performing in the US."
+    },
+    {
+        "id":  3,
+        "artist":  "America",
+        "album":  "History: America\u0027s Greatest Hits",
+        "year":  "1975",
+        "genre":  "Folk Rock",
+        "funFact":  "This compilation album has been certified multi-platinum and remains one of the band\u0027s best-selling releases."
+    },
+    {
+        "id":  4,
+        "artist":  "Anita Bryant",
+        "album":  "Mine Eyes Have Seen the Glory",
+        "year":  "1964",
+        "genre":  "Gospel",
+        "funFact":  "Anita Bryant was a singer and beauty pageant winner who later became known for her political activism."
+    },
+    {
+        "id":  5,
+        "artist":  "Arctic Monkeys",
+        "album":  "Arctic Monkeys",
+        "year":  "2006",
+        "genre":  "Indie Rock",
+        "funFact":  "This debut EP by Arctic Monkeys was initially handed out for free at their early gigs."
+    },
+    {
+        "id":  6,
+        "artist":  "Atlantic Starr",
+        "album":  "All in the Name of Love",
+        "year":  "1987",
+        "genre":  "R\u0026B/Soul",
+        "funFact":  "This album contained the hit single \"Always,\" which reached #1 on the Billboard Hot 100."
+    },
+    {
+        "id":  7,
+        "artist":  "Azia",
+        "album":  "Azia",
+        "year":  "1979",
+        "genre":  "Disco/Funk",
+        "funFact":  "Azia was a short-lived disco project featuring singer Aziza Mustafa Zadeh, though this is lesser-known compared to her later jazz career."
+    },
+    {
+        "id":  8,
+        "artist":  "Benny Goodman",
+        "album":  "Live at Carnegie Hall: 40th Anniversary Concert",
+        "year":  "1978",
+        "genre":  "Jazz/Swing",
+        "funFact":  "This album commemorates Goodman\u0027s famous 1938 Carnegie Hall concert, which was one of the first major jazz performances in the venue."
+    },
+    {
+        "id":  9,
+        "artist":  "Black Pumas",
+        "album":  "Chronicles of a Diamond",
+        "year":  "2023",
+        "genre":  "Soul/Psychedelic Rock",
+        "funFact":  "This is the band\u0027s second studio album, following their Grammy-nominated self-titled debut."
+    },
+    {
+        "id":  10,
+        "artist":  "Johnny Cash",
+        "album":  "The Fabulous Johnny Cash",
+        "year":  "1958",
+        "genre":  "Country",
+        "funFact":  "This was Johnny Cash\u0027s third studio album and his first for Columbia Records."
+    },
+    {
+        "id":  11,
+        "artist":  "Blue Öyster Cult",
+        "album":  "Blue Öyster Cult",
+        "year":  "1972",
+        "genre":  "Hard Rock",
+        "funFact":  "The band\u0027s logo, the \"Cross of Cronos,\" has become one of rock\u0027s most recognizable symbols."
+    },
+    {
+        "id":  12,
+        "artist":  "Bobby Goldsboro",
+        "album":  "Honey",
+        "year":  "1968",
+        "genre":  "Pop",
+        "funFact":  "The title track \"Honey\" was a massive hit, spending five weeks at No. 1 on the Billboard Hot 100."
+    },
+    {
+        "id":  13,
+        "artist":  "Bobby Hackett",
+        "album":  "Trumpets\u0027 Greatest Hits",
+        "year":  "1965",
+        "genre":  "Jazz",
+        "funFact":  "Bobby Hackett was a jazz cornet player known for his lyrical style and collaborations with Glenn Miller and Jackie Gleason."
+    },
+    {
+        "id":  14,
+        "artist":  "Brooklyn Dreams",
+        "album":  "Sleepless Nights",
+        "year":  "1979",
+        "genre":  "Disco/R\u0026B",
+        "funFact":  "Brooklyn Dreams collaborated with Donna Summer on her hit \"Heaven Knows.\""
+    },
+    {
+        "id":  15,
+        "artist":  "Bryan Adams",
+        "album":  "Cuts Like a Knife",
+        "year":  "1983",
+        "genre":  "Rock",
+        "funFact":  "This was Bryan Adams\u0027 breakthrough album, featuring his first Top 10 hit \"Straight From the Heart.\""
+    },
+    {
+        "id":  16,
+        "artist":  "Captain Beyond",
+        "album":  "Sufficiently Breathless",
+        "year":  "1973",
+        "genre":  "Progressive Rock",
+        "funFact":  "Captain Beyond was a supergroup featuring former members of Iron Butterfly and Deep Purple."
+    },
+    {
+        "id":  17,
+        "artist":  "Carpenters",
+        "album":  "Close to You",
+        "year":  "1970",
+        "genre":  "Pop",
+        "funFact":  "This was the Carpenters\u0027 second studio album and their commercial breakthrough, featuring the hit title track."
+    },
+    {
+        "id":  18,
+        "artist":  "Charlie Byrd",
+        "album":  "Jazz Recital",
+        "year":  "1957",
+        "genre":  "Jazz",
+        "funFact":  "Charlie Byrd was instrumental in introducing bossa nova to American audiences."
+    },
+    {
+        "id":  19,
+        "artist":  "Johnny Cash",
+        "album":  "Now Here\u0027s Johnny Cash",
+        "year":  "1961",
+        "genre":  "Country",
+        "funFact":  "This album features Cash\u0027s first recording of \"I Still Miss Someone,\" which became one of his signature songs."
+    },
+    {
+        "id":  20,
+        "artist":  "Christopher Cross",
+        "album":  "Christopher Cross",
+        "year":  "1979",
+        "genre":  "Soft Rock",
+        "funFact":  "This debut album won five Grammy Awards, including Album of the Year, making Cross the first artist to win all four general field Grammy awards in one night."
+    },
+    {
+        "id":  21,
+        "artist":  "Crystal Gayle",
+        "album":  "When I Dream",
+        "year":  "1978",
+        "genre":  "Country/Pop",
+        "funFact":  "This album features Crystal Gayle\u0027s hit \"Talking in Your Sleep,\" which reached No. 1 on the country charts."
+    },
+    {
+        "id":  22,
+        "artist":  "Dan Fogelberg",
+        "album":  "Captured Angel",
+        "year":  "1975",
+        "genre":  "Folk Rock",
+        "funFact":  "Dan Fogelberg played most of the instruments on this album himself, showcasing his multi-instrumental talents."
+    },
+    {
+        "id":  23,
+        "artist":  "Dave Brubeck et al.",
+        "album":  "All the Things We Are",
+        "year":  "1976",
+        "genre":  "Jazz",
+        "funFact":  "This album features an all-star lineup of jazz musicians from different generations."
+    },
+    {
+        "id":  24,
+        "artist":  "David Bowie",
+        "album":  "Let\u0027s Dance",
+        "year":  "1983",
+        "genre":  "Pop/Rock",
+        "funFact":  "This album was produced by Nile Rodgers and contained three of Bowie\u0027s most successful singles."
+    },
+    {
+        "id":  25,
+        "artist":  "David Cassidy",
+        "album":  "Dreams Are Nuthin\u0027 More than Wishes",
+        "year":  "1973",
+        "genre":  "Pop",
+        "funFact":  "This was Cassidy\u0027s third solo album, released at the height of his teen idol fame from \"The Partridge Family.\""
+    },
+    {
+        "id":  26,
+        "artist":  "De Denise",
+        "album":  "Cha Cha Cha Fiesta",
+        "year":  "1965",
+        "genre":  "Latin",
+        "funFact":  "Cha-cha-chá is a dance of Cuban origin, and this album likely features popular cha-cha-chá tunes."
+    },
+    {
+        "id":  27,
+        "artist":  "Deep Purple",
+        "album":  "Made in Japan",
+        "year":  "1972",
+        "genre":  "Hard Rock",
+        "funFact":  "This live album is considered one of the greatest live rock albums of all time and features the classic Deep Purple Mark II lineup."
+    },
+    {
+        "id":  28,
+        "artist":  "Detroit",
+        "album":  "Detroit",
+        "year":  "1971",
+        "genre":  "Rock",
+        "funFact":  "This was a short-lived rock band featuring Mitch Ryder, known for their energetic live performances."
+    },
+    {
+        "id":  29,
+        "artist":  "Dick and Dee Dee",
+        "album":  "Young and in Love",
+        "year":  "1963",
+        "genre":  "Pop",
+        "funFact":  "Dick and Dee Dee were a pop duo best known for their 1961 hit \"The Mountain\u0027s High.\""
+    },
+    {
+        "id":  30,
+        "artist":  "Dion",
+        "album":  "Sit Down Old Friend",
+        "year":  "1970",
+        "genre":  "Folk Rock",
+        "funFact":  "This album marked a departure from Dion\u0027s doo-wop roots, showcasing a more introspective, folk-influenced style."
+    },
+    {
+        "id":  31,
+        "artist":  "Doris Day",
+        "album":  "Doris Day\u0027s Greatest Hits",
+        "year":  "1958",
+        "genre":  "Pop/Vocal",
+        "funFact":  "Doris Day was not only a successful singer but also a popular actress in Hollywood musicals and romantic comedies."
+    },
+    {
+        "id":  32,
+        "artist":  "Duke Ellington",
+        "album":  "Duke Ellington Volume 3",
+        "year":  "1940",
+        "genre":  "Jazz",
+        "funFact":  "Duke Ellington led his orchestra for over 50 years and composed thousands of songs, making him one of the most influential figures in jazz."
+    },
+    {
+        "id":  33,
+        "artist":  "Duke Ellington and His Orchestra",
+        "album":  "Ellington Uptown",
+        "year":  "1952",
+        "genre":  "Jazz",
+        "funFact":  "This album features Ellington\u0027s extended composition \"A Tone Parallel to Harlem,\" also known as \"The Harlem Suite.\""
+    },
+    {
+        "id":  34,
+        "artist":  "Eddy Arnold",
+        "album":  "The Best of Eddy Arnold",
+        "year":  "1966",
+        "genre":  "Country",
+        "funFact":  "Eddy Arnold was nicknamed \"The Tennessee Plowboy\" and was elected to the Country Music Hall of Fame in 1966."
+    },
+    {
+        "id":  35,
+        "artist":  "Eileen Farrell with Percy Faith and His Orchestra",
+        "album":  "This Fling Called Love",
+        "year":  "1960",
+        "genre":  "Vocal/Orchestral",
+        "funFact":  "Eileen Farrell was equally famous as an opera singer and a pop vocalist, making her one of the most versatile singers of her time."
+    },
+    {
+        "id":  36,
+        "artist":  "Electric Light Orchestra",
+        "album":  "Out of the Blue",
+        "year":  "1977",
+        "genre":  "Rock/Pop",
+        "funFact":  "This double album features some of ELO\u0027s biggest hits, including \"Mr. Blue Sky\" and \"Turn to Stone.\""
+    },
+    {
+        "id":  37,
+        "artist":  "Engelbert Humperdinck",
+        "album":  "His Greatest Hits",
+        "year":  "1969",
+        "genre":  "Pop/Easy Listening",
+        "funFact":  "Engelbert Humperdinck has sold over 140 million records worldwide throughout his career."
+    },
+    {
+        "id":  38,
+        "artist":  "Johnny Cash",
+        "album":  "Johnny Cash\u0027s Greatest Hits, Vol. 1",
+        "year":  "1967",
+        "genre":  "Country",
+        "funFact":  "This compilation includes many of Cash\u0027s early hits from his time with Sun Records."
+    },
+    {
+        "id":  39,
+        "artist":  "Engelbert Humperdinck",
+        "album":  "This Moment in Time",
+        "year":  "1979",
+        "genre":  "Pop/Easy Listening",
+        "funFact":  "Engelbert Humperdinck\u0027s real name is Arnold George Dorsey; he adopted his stage name from a 19th-century German composer."
+    },
+    {
+        "id":  40,
+        "artist":  "Enoch Light and His Orchestra",
+        "album":  "At Carnegie Hall Play Irving Berlin",
+        "year":  "1960",
+        "genre":  "Orchestral/Pop",
+        "funFact":  "Enoch Light was known for his innovative stereo recordings and founded Command Records."
+    },
+    {
+        "id":  41,
+        "artist":  "Ferrante and Teicher",
+        "album":  "Love in the Generation Gap",
+        "year":  "1970",
+        "genre":  "Easy Listening/Pop",
+        "funFact":  "Ferrante and Teicher were a duo-piano team known for their elaborate arrangements of pop songs and movie themes."
+    },
+    {
+        "id":  42,
+        "artist":  "Firefall",
+        "album":  "Elan",
+        "year":  "1978",
+        "genre":  "Rock",
+        "funFact":  "\"Elan\" means vigor or enthusiasm, which might reflect the style of music on this album."
+    },
+    {
+        "id":  43,
+        "artist":  "Firefall",
+        "album":  "Luna Sea",
+        "year":  "1977",
+        "genre":  "Rock",
+        "funFact":  "\"Luna Sea\" is a play on the word \"lunacy,\" suggesting this might be a concept album or have a moon/space theme."
+    },
+    {
+        "id":  44,
+        "artist":  "Firefall",
+        "album":  "Firefall",
+        "year":  "1976",
+        "genre":  "Soft Rock",
+        "funFact":  "Firefall\u0027s self-titled debut album contained their hit single \"You Are the Woman.\""
+    },
+    {
+        "id":  45,
+        "artist":  "Fleetwood Mac",
+        "album":  "Tusk",
+        "year":  "1979",
+        "genre":  "Rock",
+        "funFact":  "\"Tusk\" was one of the most expensive rock albums ever made at the time, costing over $1 million to produce."
+    },
+    {
+        "id":  46,
+        "artist":  "Floyd Cramer",
+        "album":  "Class of \u002768",
+        "year":  "1968",
+        "genre":  "Country/Pop",
+        "funFact":  "Floyd Cramer was known for his \"slip note\" piano style, which became a hallmark of the Nashville sound."
+    },
+    {
+        "id":  47,
+        "artist":  "Four Tops",
+        "album":  "Four Tops",
+        "year":  "1965",
+        "genre":  "R\u0026B/Soul",
+        "funFact":  "The Four Tops were one of Motown\u0027s most consistent hit-makers throughout the 1960s."
+    },
+    {
+        "id":  48,
+        "artist":  "Frank DeVol and His Orchestra",
+        "album":  "Fabulous Hollywood!",
+        "year":  "1959",
+        "genre":  "Orchestral/Film Music",
+        "funFact":  "Frank DeVol was a prolific composer for film and television, including the theme for \"The Brady Bunch.\""
+    },
+    {
+        "id":  49,
+        "artist":  "Genesis",
+        "album":  "Three Sides Live",
+        "year":  "1982",
+        "genre":  "Progressive Rock",
+        "funFact":  "Despite its name, only three sides of this double album were recorded live, with the fourth side featuring studio recordings."
+    },
+    {
+        "id":  50,
+        "artist":  "George Jones",
+        "album":  "Jones Country",
+        "year":  "1983",
+        "genre":  "Country",
+        "funFact":  "George Jones had more Top 40 hits than any other country artist, with 143 making the charts over his long career."
+    },
+    {
+        "id":  51,
+        "artist":  "George Jones",
+        "album":  "Greatest Hits",
+        "year":  "1961",
+        "genre":  "Country",
+        "funFact":  "George Jones was nicknamed \"The Possum\" and is considered one of the greatest country singers of all time."
+    },
+    {
+        "id":  52,
+        "artist":  "Gordon Jenkins",
+        "album":  "The Magic World of Gordon Jenkins",
+        "year":  "1962",
+        "genre":  "Orchestral/Easy Listening",
+        "funFact":  "Gordon Jenkins was a prolific arranger and composer who worked with many of the biggest names in American popular music."
+    },
+    {
+        "id":  53,
+        "artist":  "Hall \u0026 Oates",
+        "album":  "H2O",
+        "year":  "1982",
+        "genre":  "Rock/Pop",
+        "funFact":  "This album contains the hit single \"Maneater,\" which became Hall \u0026 Oates\u0027 most successful single."
+    },
+    {
+        "id":  54,
+        "artist":  "Harry Belafonte",
+        "album":  "Harry Belafonte Sings Five Early Songs",
+        "year":  "1954",
+        "genre":  "Calypso/Folk",
+        "funFact":  "Harry Belafonte was known as the \"King of Calypso\" and was one of the most successful Jamaican-American pop stars in history."
+    },
+    {
+        "id":  55,
+        "artist":  "Harry Chapin",
+        "album":  "Living Room Suite",
+        "year":  "1978",
+        "genre":  "Folk Rock",
+        "funFact":  "Harry Chapin was known for his storytelling songs, and this album continues that tradition."
+    },
+    {
+        "id":  56,
+        "artist":  "Heart",
+        "album":  "Dreamboat Annie",
+        "year":  "1975",
+        "genre":  "Rock",
+        "funFact":  "This was Heart\u0027s debut studio album and it launched them to stardom with hits like \"Crazy on You\" and \"Magic Man.\""
+    },
+    {
+        "id":  57,
+        "artist":  "Heart",
+        "album":  "Little Queen",
+        "year":  "1977",
+        "genre":  "Rock",
+        "funFact":  "This album features Heart\u0027s hit \"Barracuda,\" inspired by the band\u0027s anger at their record label."
+    },
+    {
+        "id":  58,
+        "artist":  "Heart",
+        "album":  "Bebe le Strange",
+        "year":  "1980",
+        "genre":  "Rock",
+        "funFact":  "The actual title of this album is \"Bebe le Strange,\" not \"Back to Avenge.\" It marked a harder rock sound for Heart."
+    },
+    {
+        "id":  59,
+        "artist":  "Herb Alpert and the Tijuana Brass",
+        "album":  "South of the Border",
+        "year":  "1964",
+        "genre":  "Easy Listening/Pop",
+        "funFact":  "This album reached #6 on the Billboard 200 chart and stayed there for 122 weeks."
+    },
+    {
+        "id":  60,
+        "artist":  "Herb Alpert and the Tijuana Brass",
+        "album":  "!!Going Places!!",
+        "year":  "1965",
+        "genre":  "Easy Listening/Pop",
+        "funFact":  "This album spent 6 weeks at #1 on the Billboard Top LPs chart."
+    },
+    {
+        "id":  61,
+        "artist":  "Herb Alpert and the Tijuana Brass",
+        "album":  "Whipped Cream \u0026 Other Delights",
+        "year":  "1965",
+        "genre":  "Easy Listening/Pop",
+        "funFact":  "The album\u0027s iconic cover featuring a woman covered in whipped cream became one of the most recognizable and parodied album covers in music history."
+    },
+    {
+        "id":  62,
+        "artist":  "Huey Lewis and the News",
+        "album":  "Sports",
+        "year":  "1983",
+        "genre":  "Rock",
+        "funFact":  "This album produced four top 10 hit singles on the Billboard Hot 100 and was one of the biggest albums of 1984."
+    },
+    {
+        "id":  63,
+        "artist":  "Iron Maiden",
+        "album":  "Iron Maiden",
+        "year":  "1980",
+        "genre":  "Heavy Metal",
+        "funFact":  "This self-titled debut album established Iron Maiden as one of the pioneers of the New Wave of British Heavy Metal."
+    },
+    {
+        "id":  64,
+        "artist":  "Iron Maiden",
+        "album":  "Killers",
+        "year":  "1981",
+        "genre":  "Heavy Metal",
+        "funFact":  "This was Iron Maiden\u0027s last album with original vocalist Paul Di\u0027Anno before Bruce Dickinson joined the band."
+    },
+    {
+        "id":  65,
+        "artist":  "Iron Maiden",
+        "album":  "The Number of the Beast",
+        "year":  "1982",
+        "genre":  "Heavy Metal",
+        "funFact":  "This album marked Bruce Dickinson\u0027s debut as Iron Maiden\u0027s lead vocalist and is considered one of the greatest heavy metal albums of all time."
+    },
+    {
+        "id":  66,
+        "artist":  "Iron Maiden",
+        "album":  "Piece of Mind",
+        "year":  "1983",
+        "genre":  "Heavy Metal",
+        "funFact":  "This was the first Iron Maiden album to feature drummer Nicko McBrain, who has been with the band ever since."
+    },
+    {
+        "id":  67,
+        "artist":  "Iron Maiden",
+        "album":  "Live After Death",
+        "year":  "1985",
+        "genre":  "Heavy Metal",
+        "funFact":  "This live album was recorded during Iron Maiden\u0027s World Slavery Tour and is considered one of the greatest live albums in heavy metal."
+    },
+    {
+        "id":  68,
+        "artist":  "Jackie Gleason",
+        "album":  "Champagne, Candlelight and Kisses",
+        "year":  "1963",
+        "genre":  "Easy Listening/Mood Music",
+        "funFact":  "Jackie Gleason, famous for his acting, was also a successful orchestra leader known for his \"mood music\" albums."
+    },
+    {
+        "id":  69,
+        "artist":  "Janis Ian",
+        "album":  "Aftertones",
+        "year":  "1976",
+        "genre":  "Folk/Pop",
+        "funFact":  "Janis Ian (correct spelling) had a career resurgence in the mid-1970s with introspective songs like those on this album."
+    },
+    {
+        "id":  70,
+        "artist":  "Joe Harnell",
+        "album":  "I Want to Be Happy",
+        "year":  "1960",
+        "genre":  "Jazz/Easy Listening",
+        "funFact":  "Joe Harnell was a Grammy-winning pianist and arranger who worked with many famous artists and composed for TV."
+    },
+    {
+        "id":  71,
+        "artist":  "Joe Jackson",
+        "album":  "Night and Day",
+        "year":  "1982",
+        "genre":  "New Wave/Pop",
+        "funFact":  "This album marked a shift towards a more sophisticated, jazz-influenced sound for Joe Jackson and features his hit \"Steppin\u0027 Out.\""
+    },
+    {
+        "id":  72,
+        "artist":  "Judas Priest",
+        "album":  "Screaming for Vengeance",
+        "year":  "1982",
+        "genre":  "Heavy Metal",
+        "funFact":  "This album contains Judas Priest\u0027s most well-known song, \"You\u0027ve Got Another Thing Comin\u0027.\""
+    },
+    {
+        "id":  73,
+        "artist":  "Judas Priest",
+        "album":  "Defenders of the Faith",
+        "year":  "1984",
+        "genre":  "Heavy Metal",
+        "funFact":  "The album cover features the band\u0027s mascot \"The Metallian,\" a tiger-like creature piloting a futuristic vehicle."
+    },
+    {
+        "id":  74,
+        "artist":  "Kim Carnes",
+        "album":  "Mistaken Identity",
+        "year":  "1981",
+        "genre":  "Rock/New Wave",
+        "funFact":  "This album contains Carnes\u0027 biggest hit, \"Bette Davis Eyes,\" which won the Grammy for Record of the Year."
+    },
+    {
+        "id":  75,
+        "artist":  "Leon Bibb",
+        "album":  "Encore! Leon Bibb in Concert",
+        "year":  "1965",
+        "genre":  "Folk",
+        "funFact":  "Leon Bibb was a prominent folk singer and actor who performed at the first Newport Folk Festival in 1959."
+    },
+    {
+        "id":  76,
+        "artist":  "Los Cuatro Amigos",
+        "album":  "Los Cuatro Amigos",
+        "year":  "1965",
+        "genre":  "Latin",
+        "funFact":  "\"Los Cuatro Amigos\" means \"The Four Friends\" in Spanish, likely referring to the members of this Latin music group."
+    },
+    {
+        "id":  77,
+        "artist":  "Louis Armstrong",
+        "album":  "Hello, Dolly!",
+        "year":  "1964",
+        "genre":  "Jazz/Pop",
+        "funFact":  "The title track knocked The Beatles off the top of the charts, making Armstrong the oldest artist to have a #1 hit at that time."
+    },
+    {
+        "id":  78,
+        "artist":  "Louis Armstrong",
+        "album":  "The Best of Louis Armstrong",
+        "year":  "1966",
+        "genre":  "Jazz",
+        "funFact":  "Louis Armstrong was nicknamed \"Satchmo,\" short for \"Satchel Mouth.\""
+    },
+    {
+        "id":  79,
+        "artist":  "Louis Clark with the Royal Philharmonic Orchestra",
+        "album":  "Hooked on Classics",
+        "year":  "1981",
+        "genre":  "Classical/Disco",
+        "funFact":  "This album featured classical music pieces set to a disco beat, becoming an unexpected commercial success."
+    },
+    {
+        "id":  80,
+        "artist":  "Marvin Gaye",
+        "album":  "A Tribute to the Great Nat King Cole",
+        "year":  "1965",
+        "genre":  "Soul/Jazz",
+        "funFact":  "This album showcases Marvin Gaye\u0027s versatility as a vocalist, paying homage to one of his early influences."
+    },
+    {
+        "id":  81,
+        "artist":  "Marvin Gaye",
+        "album":  "Marvin Gaye and His Girls",
+        "year":  "1969",
+        "genre":  "Soul/R\u0026B",
+        "funFact":  "This album features duets with various female Motown artists, including Tammi Terrell and Mary Wells."
+    },
+    {
+        "id":  82,
+        "artist":  "Michael Jackson",
+        "album":  "Thriller",
+        "year":  "1982",
+        "genre":  "Pop/R\u0026B",
+        "funFact":  "\"Thriller\" is the best-selling album of all time, with estimated sales of 66 million copies worldwide."
+    },
+    {
+        "id":  83,
+        "artist":  "Morris Albert",
+        "album":  "Feelings",
+        "year":  "1975",
+        "genre":  "Pop",
+        "funFact":  "The title track \"Feelings\" became a worldwide hit and has been covered by numerous artists."
+    },
+    {
+        "id":  84,
+        "artist":  "Morton Gould and His Orchestra",
+        "album":  "Starlight Serenade",
+        "year":  "1955",
+        "genre":  "Orchestral/Easy Listening",
+        "funFact":  "Morton Gould was a prolific composer and conductor who worked in many genres, from classical to popular music."
+    },
+    {
+        "id":  85,
+        "artist":  "Nat King Cole",
+        "album":  "Forever Yours",
+        "year":  "1956",
+        "genre":  "Vocal Jazz",
+        "funFact":  "This album features Cole\u0027s interpretations of romantic ballads and standards."
+    },
+    {
+        "id":  86,
+        "artist":  "Nat King Cole",
+        "album":  "Love Is the Thing",
+        "year":  "1957",
+        "genre":  "Vocal Jazz",
+        "funFact":  "This album was arranged and conducted by Gordon Jenkins and is considered one of Cole\u0027s finest."
+    },
+    {
+        "id":  87,
+        "artist":  "Neil Diamond",
+        "album":  "Moods",
+        "year":  "1972",
+        "genre":  "Pop/Rock",
+        "funFact":  "This album contains one of Diamond\u0027s signature songs, \"Song Sung Blue,\" which reached #1 on the Billboard Hot 100."
+    },
+    {
+        "id":  88,
+        "artist":  "Neil Diamond",
+        "album":  "Rainbow",
+        "year":  "1973",
+        "genre":  "Pop/Rock",
+        "funFact":  "This album features Diamond\u0027s hit cover of \"Holly Holy,\" originally from his 1969 album \"Touching You, Touching Me.\""
+    },
+    {
+        "id":  89,
+        "artist":  "Neil Diamond",
+        "album":  "Rainbow",
+        "year":  "1973",
+        "genre":  "Pop/Rock",
+        "funFact":  "This album features Diamond\u0027s hit cover of \"Holly Holy,\" originally from his 1969 album \"Touching You, Touching Me.\""
+    },
+    {
+        "id":  90,
+        "artist":  "Neil Diamond",
+        "album":  "Jonathan Livingston Seagull",
+        "year":  "1973",
+        "genre":  "Soundtrack/Pop",
+        "funFact":  "This soundtrack album for the film of the same name was a huge commercial success, spending two weeks at No. 1 on the Billboard albums chart."
+    },
+    {
+        "id":  91,
+        "artist":  "New York Cast",
+        "album":  "The Boys from Syracuse",
+        "year":  "1963",
+        "genre":  "Musical Theatre",
+        "funFact":  "This is a cast recording of the 1963 off-Broadway revival of the Rodgers and Hart musical."
+    },
+    {
+        "id":  92,
+        "artist":  "Nicky Hopkins",
+        "album":  "The Tin Man Was a Dreamer",
+        "year":  "1973",
+        "genre":  "Rock",
+        "funFact":  "Nicky Hopkins was a session musician who played piano for many famous rock bands, including The Rolling Stones and The Beatles."
+    },
+    {
+        "id":  93,
+        "artist":  "Original Broadway Cast",
+        "album":  "Hair",
+        "year":  "1968",
+        "genre":  "Musical/Rock",
+        "funFact":  "\"Hair\" was groundbreaking for its treatment of the hippie counterculture and inclusion of brief nudity on stage."
+    },
+    {
+        "id":  94,
+        "artist":  "Pat Benatar",
+        "album":  "In the Heat of the Night",
+        "year":  "1979",
+        "genre":  "Rock",
+        "funFact":  "This was Pat Benatar\u0027s debut album and contained her breakthrough hit \"Heartbreaker.\""
+    },
+    {
+        "id":  95,
+        "artist":  "Paul Anchor",
+        "album":  "Feelings",
+        "year":  "1975",
+        "genre":  "Pop",
+        "funFact":  "This appears to be a cover version of Morris Albert\u0027s hit song \"Feelings.\""
+    },
+    {
+        "id":  96,
+        "artist":  "Paul McCartney and Wings",
+        "album":  "Band on the Run",
+        "year":  "1973",
+        "genre":  "Rock",
+        "funFact":  "This album was partially recorded in Lagos, Nigeria, and is considered one of McCartney\u0027s finest post-Beatles works."
+    },
+    {
+        "id":  97,
+        "artist":  "Pearl Bailey",
+        "album":  "Around the World with Me",
+        "year":  "1959",
+        "genre":  "Jazz/Pop",
+        "funFact":  "Pearl Bailey was not only a singer but also an actress who won a Tony Award for her role in the all-black production of \"Hello, Dolly!\""
+    },
+    {
+        "id":  98,
+        "artist":  "Pete Fountain",
+        "album":  "The Blues",
+        "year":  "1959",
+        "genre":  "Jazz",
+        "funFact":  "Pete Fountain was a renowned jazz clarinetist from New Orleans, known for his Dixieland style."
+    },
+    {
+        "id":  99,
+        "artist":  "Pete Fountain",
+        "album":  "Let the Good Times Roll",
+        "year":  "1962",
+        "genre":  "Jazz",
+        "funFact":  "\"Let the Good Times Roll\" is a classic New Orleans jazz standard, fitting for Fountain\u0027s style."
+    },
+    {
+        "id":  100,
+        "artist":  "Peter Frampton",
+        "album":  "Frampton Comes Alive!",
+        "year":  "1976",
+        "genre":  "Rock",
+        "funFact":  "This live double album became one of the best-selling live albums of all time, propelling Peter Frampton to superstardom."
+    },
+    {
+        "id":  101,
+        "artist":  "Ralph and Buddy Bonds",
+        "album":  "All Stops Out",
+        "year":  "1969",
+        "genre":  "Organ Music",
+        "funFact":  "\"All stops out\" is an organ playing term, suggesting this album features virtuosic organ performances."
+    },
+    {
+        "id":  102,
+        "artist":  "Ray Anthony",
+        "album":  "Ray Anthony Plays for Dream Dancing",
+        "year":  "1956",
+        "genre":  "Big Band/Jazz",
+        "funFact":  "Ray Anthony is known for recording the theme song for the TV series \"Dragnet.\""
+    },
+    {
+        "id":  103,
+        "artist":  "Ray Conniff",
+        "album":  "Concert in Rhythm",
+        "year":  "1958",
+        "genre":  "Easy Listening",
+        "funFact":  "Ray Conniff was known for his unique vocal-instrumental style, often featuring a wordless chorus."
+    },
+    {
+        "id":  104,
+        "artist":  "Ray Conniff and Johnny Mathis",
+        "album":  "Something Special",
+        "year":  "1967",
+        "genre":  "Easy Listening/Vocal",
+        "funFact":  "This collaboration brought together two of Columbia Records\u0027 biggest stars of the 1960s."
+    },
+    {
+        "id":  105,
+        "artist":  "Richard Kauhi and the Polynesians",
+        "album":  "Hawaiian Sunset",
+        "year":  "1963",
+        "genre":  "Hawaiian/Easy Listening",
+        "funFact":  "Hawaiian music became popular in mainland United States during the mid-20th century, leading to many albums like this."
+    },
+    {
+        "id":  106,
+        "artist":  "Rita Coolidge",
+        "album":  "The Lady\u0027s Not for Sale",
+        "year":  "1972",
+        "genre":  "Rock/Pop",
+        "funFact":  "This was Rita Coolidge\u0027s second solo album and helped establish her as a solo artist after her work with Joe Cocker and Leon Russell."
+    },
+    {
+        "id":  107,
+        "artist":  "Roberta Flack and Donny Hathaway",
+        "album":  "Roberta Flack \u0026 Donny Hathaway",
+        "year":  "1972",
+        "genre":  "Soul/R\u0026B",
+        "funFact":  "This collaborative album features the hit duet \"Where Is the Love,\" which won a Grammy Award."
+    },
+    {
+        "id":  108,
+        "artist":  "Ron Goodwin and his Orchestra",
+        "album":  "Music for an Arabian Night",
+        "year":  "1959",
+        "genre":  "Orchestral/World",
+        "funFact":  "Ron Goodwin was also a renowned film composer, scoring movies like \"Where Eagles Dare\" and \"Battle of Britain.\""
+    },
+    {
+        "id":  109,
+        "artist":  "Samantha Fox",
+        "album":  "I Wanna Have Some Fun",
+        "year":  "1988",
+        "genre":  "Pop/Dance",
+        "funFact":  "Samantha Fox started her career as a model before becoming a successful pop singer in the 1980s."
+    },
+    {
+        "id":  110,
+        "artist":  "Stan Getz and Charlie Byrd",
+        "album":  "Jazz Samba",
+        "year":  "1962",
+        "genre":  "Jazz/Bossa Nova",
+        "funFact":  "This album is credited with launching the bossa nova craze in the United States."
+    },
+    {
+        "id":  111,
+        "artist":  "Stanley Black",
+        "album":  "Cuban Moonlight",
+        "year":  "1958",
+        "genre":  "Latin Jazz",
+        "funFact":  "Stanley Black was a British bandleader and composer known for his Latin American music interpretations."
+    },
+    {
+        "id":  112,
+        "artist":  "Steve Allen",
+        "album":  "Gravy Waltz and 11 Current Hits",
+        "year":  "1963",
+        "genre":  "Jazz/Pop",
+        "funFact":  "Steve Allen was not only a musician but also the original host of \"The Tonight Show.\""
+    },
+    {
+        "id":  113,
+        "artist":  "Tammy Grimes",
+        "album":  "Tammy Grimes",
+        "year":  "1962",
+        "genre":  "Vocal/Broadway",
+        "funFact":  "Tammy Grimes was a Tony Award-winning actress known for her distinctive voice and stage presence."
+    },
+    {
+        "id":  114,
+        "artist":  "The Band",
+        "album":  "Anthology Volume 1",
+        "year":  "1978",
+        "genre":  "Rock",
+        "funFact":  "The Band was originally formed as a backing group for rockabilly singer Ronnie Hawkins."
+    },
+    {
+        "id":  115,
+        "artist":  "The Blues Brothers",
+        "album":  "Briefcase Full of Blues",
+        "year":  "1978",
+        "genre":  "Blues Rock",
+        "funFact":  "This album was recorded live as the opening act for Steve Martin, before the release of the Blues Brothers movie."
+    },
+    {
+        "id":  116,
+        "artist":  "The Cars",
+        "album":  "Shake It Up",
+        "year":  "1981",
+        "genre":  "New Wave/Rock",
+        "funFact":  "The title track became one of The Cars\u0027 most recognizable hits."
+    },
+    {
+        "id":  117,
+        "artist":  "The Cascades",
+        "album":  "Rhythm of the Rain",
+        "year":  "1963",
+        "genre":  "Pop",
+        "funFact":  "The title track \"Rhythm of the Rain\" became The Cascades\u0027 biggest hit, reaching #3 on the Billboard Hot 100."
+    },
+    {
+        "id":  118,
+        "artist":  "The Doobie Brothers",
+        "album":  "Living on the Fault Line",
+        "year":  "1977",
+        "genre":  "Rock",
+        "funFact":  "This album marked a shift towards a more jazz-influenced sound for the band."
+    },
+    {
+        "id":  119,
+        "artist":  "The Four Lads",
+        "album":  "Love Affair",
+        "year":  "1957",
+        "genre":  "Vocal Pop",
+        "funFact":  "The Four Lads had several hits in the 1950s, including \"Moments to Remember\" and \"Standing on the Corner.\""
+    },
+    {
+        "id":  120,
+        "artist":  "The Four Lads",
+        "album":  "Breezin\u0027 Along",
+        "year":  "1958",
+        "genre":  "Vocal Pop",
+        "funFact":  "The Four Lads were a Canadian male singing quartet, popular in the 1950s, known for their tight harmonies."
+    },
+    {
+        "id":  121,
+        "artist":  "The Go-Go\u0027s",
+        "album":  "Greatest",
+        "year":  "1990",
+        "genre":  "New Wave/Pop",
+        "funFact":  "The Go-Go\u0027s were the first all-female band who wrote their own songs and played their own instruments to top the Billboard album charts."
+    },
+    {
+        "id":  122,
+        "artist":  "The Grass Roots",
+        "album":  "Golden Grass: Their Greatest Hits",
+        "year":  "1968",
+        "genre":  "Rock/Pop",
+        "funFact":  "The Grass Roots had 21 Hot 100 singles, including two that reached the Top 10."
+    },
+    {
+        "id":  123,
+        "artist":  "The Groovin\u0027 Strings and Things",
+        "album":  "The Groovin\u0027 Strings and Things",
+        "year":  "1968",
+        "genre":  "Easy Listening/Pop",
+        "funFact":  "This album likely features string-based arrangements of popular songs, a common style in the 1960s and 1970s."
+    },
+    {
+        "id":  124,
+        "artist":  "The Guitar Ramblers",
+        "album":  "Youthful New Sounds",
+        "year":  "1963",
+        "genre":  "Instrumental/Pop",
+        "funFact":  "Jack Marshall was a guitarist and arranger who worked on many TV and film soundtracks."
+    },
+    {
+        "id":  125,
+        "artist":  "The Human League",
+        "album":  "Dare",
+        "year":  "1981",
+        "genre":  "Synth-pop",
+        "funFact":  "This album contains the hit single \"Don\u0027t You Want Me,\" which became the band\u0027s biggest success."
+    },
+    {
+        "id":  126,
+        "artist":  "The Percy Faith Strings",
+        "album":  "Bouquet",
+        "year":  "1959",
+        "genre":  "Easy Listening/Orchestral",
+        "funFact":  "Percy Faith was known for his lush orchestral arrangements and helped popularize the \"easy listening\" genre."
+    },
+    {
+        "id":  127,
+        "artist":  "The Ray Charles Singers",
+        "album":  "Something Special for Young Lovers",
+        "year":  "1964",
+        "genre":  "Vocal/Easy Listening",
+        "funFact":  "This Ray Charles is not the famous R\u0026B singer, but a different artist known for his vocal group arrangements."
+    },
+    {
+        "id":  128,
+        "artist":  "The Ray Charles Singers",
+        "album":  "Something Wonderful",
+        "year":  "1961",
+        "genre":  "Vocal/Easy Listening",
+        "funFact":  "The Ray Charles Singers were a popular vocal group often featured on Perry Como\u0027s TV show."
+    },
+    {
+        "id":  129,
+        "artist":  "Tom T. Hall",
+        "album":  "In Search of a Song",
+        "year":  "1971",
+        "genre":  "Country",
+        "funFact":  "Tom T. Hall was known as \"The Storyteller\" for his narrative songwriting style."
+    },
+    {
+        "id":  130,
+        "artist":  "Tommy Garrett",
+        "album":  "50 Guitars in Love",
+        "year":  "1966",
+        "genre":  "Easy Listening/Instrumental",
+        "funFact":  "Tommy Garrett\u0027s \"50 Guitars\" was a studio concept rather than an actual ensemble of 50 guitarists."
+    },
+    {
+        "id":  131,
+        "artist":  "Various Artists",
+        "album":  "Bongos, Flutes, Guitars",
+        "year":  "1958",
+        "genre":  "Exotica/Easy Listening",
+        "funFact":  "This type of album was popular in the late 1950s as part of the exotica music trend."
+    },
+    {
+        "id":  132,
+        "artist":  "Various Artists",
+        "album":  "The Girl from U.N.C.L.E.",
+        "year":  "1966",
+        "genre":  "Soundtrack/Spy Jazz",
+        "funFact":  "This is the soundtrack from the TV series \"The Girl from U.N.C.L.E.,\" a spin-off from \"The Man from U.N.C.L.E.\""
+    },
+    {
+        "id":  133,
+        "artist":  "Various Artists",
+        "album":  "Grease: The Original Soundtrack from the Motion Picture",
+        "year":  "1978",
+        "genre":  "Soundtrack/Rock \u0026 Roll",
+        "funFact":  "This soundtrack album was one of the best-selling albums of 1978 and has sold over 28 million copies worldwide."
+    },
+    {
+        "id":  134,
+        "artist":  "Various Artists",
+        "album":  "The Idolmaker",
+        "year":  "1980",
+        "genre":  "Soundtrack/Rock",
+        "funFact":  "This soundtrack is from the movie \"The Idolmaker,\" loosely based on the life of rock promoter and manager Bob Marcucci."
+    },
+    {
+        "id":  135,
+        "artist":  "Various Artists",
+        "album":  "60 Big Band Hits",
+        "year":  "Unknown",
+        "genre":  "Big Band/Swing",
+        "funFact":  "Compilation albums like this were popular ways for listeners to get a wide variety of big band music in one package."
+    },
+    {
+        "id":  136,
+        "artist":  "Various Artists",
+        "album":  "Jazz: It\u0027s Magic",
+        "year":  "1958",
+        "genre":  "Jazz",
+        "funFact":  "This appears to be a compilation album showcasing various jazz artists and styles."
+    },
+    {
+        "id":  137,
+        "artist":  "Various Artists",
+        "album":  "Wild Stereo Drums",
+        "year":  "1966",
+        "genre":  "Percussion/Experimental",
+        "funFact":  "Albums like this were popular in the early days of stereo recording to showcase the separation of sound channels."
+    },
+    {
+        "id":  138,
+        "artist":  "Vic Damone",
+        "album":  "Closer Than a Kiss",
+        "year":  "1958",
+        "genre":  "Vocal/Pop",
+        "funFact":  "Vic Damone was a contemporary of Frank Sinatra and was once praised by Sinatra as having \"the best pipes in the business.\""
+    },
+    {
+        "id":  139,
+        "artist":  "Vikki Carr",
+        "album":  "For Once in My Life",
+        "year":  "1969",
+        "genre":  "Pop",
+        "funFact":  "Vikki Carr was one of the first Latin artists to cross over into the English-language market."
+    },
+    {
+        "id":  140,
+        "artist":  "Willie Nelson",
+        "album":  "The Electric Horseman",
+        "year":  "1979",
+        "genre":  "Soundtrack/Country",
+        "funFact":  "This soundtrack album is from the film of the same name starring Robert Redford and Jane Fonda, featuring both original and previously released Willie Nelson songs."
+    },
+    {
+        "id":  141,
+        "artist":  "Xavier Cugat and His Orchestra",
+        "album":  "Waltzes",
+        "year":  "1957",
+        "genre":  "Latin/Ballroom",
+        "funFact":  "Xavier Cugat was known as the \"King of Rumba\" and helped popularize Latin music in North America."
+    }
 ]
