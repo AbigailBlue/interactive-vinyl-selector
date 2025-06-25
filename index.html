@@ -424,18 +424,21 @@
             let score = 0;
             const prefs = userPreferences;
 
-            // Genre matching
+            // Genre matching - updated to reflect actual collection structure
             if (prefs.genre !== 'surprise') {
                 const genreMap = {
-                    'rock': ['Rock', 'Hard Rock', 'Progressive Rock', 'Indie Rock', 'New Wave', 'Heavy Metal', 'Soft Rock'],
-                    'jazz': ['Jazz', 'Vocal Jazz', 'Bossa Nova', 'Blues', 'Big Band', 'Swing', 'Latin Jazz'],
-                    'pop': ['Pop', 'Easy Listening', 'Soft Rock', 'Synth-pop', 'Dance', 'Disco'],
-                    'country': ['Country', 'Folk Rock', 'Folk', 'Gospel'],
-                    'soul': ['Soul', 'R&B', 'Soul/R&B', 'Soul/Jazz', 'Calypso', 'Motown']
+                    'rock': ['Rock', 'Hard Rock', 'Heavy Metal', 'Progressive Rock', 'Blues Rock', 'Indie Rock'],
+                    'jazz': ['Jazz', 'Jazz/Swing', 'Big Band/Swing', 'Bossa Nova', 'Latin Jazz', 'Jazz Rock', 'Jazz/Soul', 'Soul/Jazz', 'Vocal Jazz'],
+                    'pop': ['Pop', 'Soft Rock', 'Pop/Rock', 'Synth-pop', 'Rock/Pop'],
+                    'disco': ['Disco/Funk', 'Disco/R&B', 'Classical/Disco', 'Pop/Dance'],
+                    'soul': ['Soul/R&B', 'R&B/Soul', 'Soul/Jazz', 'Jazz/Soul'],
+                    'country': ['Country', 'Folk Rock', 'Gospel', 'Country/Pop', 'Folk/Pop'],
+                    'easy': ['Easy Listening', 'Vocal Jazz', 'Orchestral', 'Easy Listening/Pop', 'Vocal/Pop', 'Vocal Pop', 'Orchestral/Easy Listening', 'Pop/Easy Listening', 'Hawaiian/Easy Listening'],
+                    'newwave': ['New Wave/Pop', 'New Wave/Rock', 'Indie Rock', 'Soul/Psychedelic Rock']
                 };
                 
                 const targetGenres = genreMap[prefs.genre] || [];
-                if (targetGenres.some(g => album.genre.includes(g))) {
+                if (targetGenres.some(g => album.genre.toLowerCase().includes(g.toLowerCase()))) {
                     score += 3;
                 }
             } else {
