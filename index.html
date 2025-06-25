@@ -277,11 +277,14 @@
             <div class="question-card">
                 <div class="question">What genre speaks to you right now?</div>
                 <div class="options">
-                    <div class="option" data-question="genre" data-value="rock">🎸 Rock & Hard Rock</div>
-                    <div class="option" data-question="genre" data-value="jazz">🎺 Jazz & Blues</div>
-                    <div class="option" data-question="genre" data-value="pop">🎤 Pop & Easy Listening</div>
-                    <div class="option" data-question="genre" data-value="country">🤠 Country & Folk</div>
+                    <div class="option" data-question="genre" data-value="rock">🎸 Rock & Metal</div>
+                    <div class="option" data-question="genre" data-value="jazz">🎺 Jazz & Swing</div>
+                    <div class="option" data-question="genre" data-value="pop">🎤 Pop & Soft Rock</div>
+                    <div class="option" data-question="genre" data-value="disco">🕺 Disco & Funk</div>
                     <div class="option" data-question="genre" data-value="soul">💫 Soul & R&B</div>
+                    <div class="option" data-question="genre" data-value="country">🤠 Country & Folk</div>
+                    <div class="option" data-question="genre" data-value="easy">🎼 Easy Listening & Vocals</div>
+                    <div class="option" data-question="genre" data-value="newwave">🌊 New Wave & Alternative</div>
                     <div class="option" data-question="genre" data-value="surprise">🎲 Surprise Me!</div>
                 </div>
             </div>
@@ -327,36 +330,22 @@
         // Load vinyl collection from JSON file
         async function loadVinylCollection() {
             try {
-                console.log('Attempting to load albums.json...');
-                const response = await fetch('./albums.json');
-                console.log('Fetch response:', response);
-                
+                const response = await fetch('albums.json');
                 if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status} - ${response.statusText}`);
+                    throw new Error(`HTTP error! status: ${response.status}`);
                 }
-                
                 const data = await response.json();
-                console.log('Raw JSON data:', data);
-                
-                if (!Array.isArray(data)) {
-                    throw new Error('JSON data is not an array');
-                }
-                
                 vinylCollection = data;
                 
                 // Hide loading, show questionnaire
                 document.getElementById('loading').classList.add('hidden');
                 document.getElementById('questionnaire').classList.remove('hidden');
                 
-                console.log(`Successfully loaded ${vinylCollection.length} albums from albums.json`);
+                console.log(`Loaded ${vinylCollection.length} albums from albums.json`);
             } catch (error) {
-                console.error('Detailed error loading vinyl collection:', error);
+                console.error('Error loading vinyl collection:', error);
                 document.getElementById('loading').classList.add('hidden');
-                
-                // Show more detailed error message
-                const errorDiv = document.getElementById('error');
-                errorDiv.innerHTML = `❌ Error loading vinyl collection: ${error.message}<br><br>Please check the browser console for more details.`;
-                errorDiv.classList.remove('hidden');
+                document.getElementById('error').classList.remove('hidden');
             }
         }
 
@@ -452,25 +441,29 @@
             if (prefs.era === 'modern' && year >= 1980) score += 2;
             if (prefs.era === 'timeless') score += 1;
 
-            // Mood matching
+            // Mood matching - updated for new genre structure
             const moodMap = {
-                'energetic': ['Rock', 'Hard Rock', 'Heavy Metal', 'Disco', 'Pop', 'Dance', 'New Wave'],
-                'relaxed': ['Easy Listening', 'Jazz', 'Vocal Jazz', 'Soft Rock', 'Orchestral', 'Hawaiian'],
-                'nostalgic': ['Country', 'Folk', 'Gospel', 'Big Band', 'Swing', 'Vocal'],
-                'adventurous': ['Progressive', 'Experimental', 'Synth-pop', 'New Wave', 'Psychedelic', 'Latin']
+                'energetic': ['Rock', 'Hard Rock', 'Heavy Metal', 'Disco/Funk', 'Disco/R&B', 'New Wave', 'Progressive Rock', 'Pop/Dance'],
+                'relaxed': ['Easy Listening', 'Jazz', 'Soft Rock', 'Vocal Jazz', 'Orchestral', 'Hawaiian/Easy Listening', 'Bossa Nova', 'Jazz/Swing'],
+                'nostalgic': ['Country', 'Folk Rock', 'Gospel', 'Big Band/Swing', 'Vocal Pop', 'Folk/Pop'],
+                'adventurous': ['Progressive Rock', 'New Wave', 'Jazz Rock', 'Soul/Psychedelic Rock', 'Indie Rock', 'Latin Jazz']
             };
 
             const moodGenres = moodMap[prefs.mood] || [];
-            if (moodGenres.some(g => album.genre.includes(g))) {
+            if (moodGenres.some(g => album.genre.toLowerCase().includes(g.toLowerCase()))) {
                 score += 2;
             }
 
-            // Familiarity bonus - look for well-known artists
+            // Familiarity bonus - artists from actual collection
             const popularArtists = [
                 'Michael Jackson', 'Heart', 'Hall & Oates', 'Fleetwood Mac', 'Iron Maiden',
                 'David Bowie', 'Electric Light Orchestra', 'Genesis', 'Deep Purple', 'The Cars',
                 'Huey Lewis and the News', 'Peter Frampton', 'Johnny Cash', 'Louis Armstrong',
-                'Carpenters', 'Neil Diamond', 'Bryan Adams', 'Pat Benatar'
+                'Carpenters', 'Neil Diamond', 'Pat Benatar', 'Led Zeppelin', 'Queen', 'The Who',
+                'Pink Floyd', 'Paul McCartney', 'John Lennon', 'Elvis Presley', 'Bruce Springsteen',
+                'Stevie Wonder', 'Neil Young', 'Bob Marley', 'Madonna', 'Journey', 'Kansas',
+                'Billy Joel', 'Elton John', 'Van Morrison', 'Simon and Garfunkel', 'Donna Summer',
+                'James Taylor', 'Cat Stevens', 'Linda Ronstadt', 'Steely Dan', 'Yes', 'The Moody Blues'
             ];
             if (prefs.familiarity === 'familiar' && popularArtists.some(a => album.artist.includes(a))) {
                 score += 1;
