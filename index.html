@@ -292,9 +292,12 @@
             <div class="question-card">
                 <div class="question">What era calls to you?</div>
                 <div class="options">
-                    <div class="option" data-question="era" data-value="classic">🕰️ Classic (50s-60s)</div>
-                    <div class="option" data-question="era" data-value="golden">✨ Golden Age (70s)</div>
-                    <div class="option" data-question="era" data-value="modern">🌟 Modern (80s+)</div>
+                    <div class="option" data-question="era" data-value="early">🎭 Early Vintage (1920s-1934)</div>
+                    <div class="option" data-question="era" data-value="swing">🎺 Big Band/Swing (1935-1940s)</div>
+                    <div class="option" data-question="era" data-value="classic">🕰️ Classic (1950s-1964)</div>
+                    <div class="option" data-question="era" data-value="golden">✨ Golden Age (1965-1970s)</div>
+                    <div class="option" data-question="era" data-value="modern">🌟 Modern (1980s-1990s)</div>
+                    <div class="option" data-question="era" data-value="contemporary">💿 Contemporary (2000s+)</div>
                     <div class="option" data-question="era" data-value="timeless">⭐ Era Doesn't Matter</div>
                 </div>
             </div>
@@ -434,11 +437,14 @@
                 score += 1; // Small bonus for surprise selection
             }
 
-            // Era matching
+            // Era matching - clean boundaries with no overlaps
             const year = parseInt(album.year) || 1970;
-            if (prefs.era === 'classic' && year >= 1950 && year <= 1969) score += 2;
-            if (prefs.era === 'golden' && year >= 1970 && year <= 1979) score += 2;
-            if (prefs.era === 'modern' && year >= 1980) score += 2;
+            if (prefs.era === 'early' && year >= 1920 && year <= 1934) score += 2;
+            if (prefs.era === 'swing' && year >= 1935 && year <= 1949) score += 2;
+            if (prefs.era === 'classic' && year >= 1950 && year <= 1964) score += 2;
+            if (prefs.era === 'golden' && year >= 1965 && year <= 1979) score += 2;
+            if (prefs.era === 'modern' && year >= 1980 && year <= 1999) score += 2;
+            if (prefs.era === 'contemporary' && year >= 2000) score += 2;
             if (prefs.era === 'timeless') score += 1;
 
             // Mood matching - updated for new genre structure
