@@ -512,15 +512,17 @@
                     score += 1; // Small bonus for surprise selection
                 }
 
-                // Era matching - clean boundaries with no overlaps
-                const year = parseInt(album.year) || 1970;
-                if (prefs.era === 'early' && year >= 1920 && year <= 1934) score += 2;
-                if (prefs.era === 'swing' && year >= 1935 && year <= 1949) score += 2;
-                if (prefs.era === 'classic' && year >= 1950 && year <= 1964) score += 2;
-                if (prefs.era === 'golden' && year >= 1965 && year <= 1979) score += 2;
-                if (prefs.era === 'modern' && year >= 1980 && year <= 1999) score += 2;
-                if (prefs.era === 'contemporary' && year >= 2000) score += 2;
-                if (prefs.era === 'timeless') score += 1;
+                 // Era matching - clean boundaries with no overlaps
+              const year = parseInt(album.year);
+              if (year && !isNaN(year)) {
+                  if (prefs.era === 'early' && year >= 1920 && year <= 1934) score += 10;
+                  if (prefs.era === 'swing' && year >= 1935 && year <= 1949) score += 10;
+                  if (prefs.era === 'classic' && year >= 1950 && year <= 1964) score += 10;
+                  if (prefs.era === 'golden' && year >= 1965 && year <= 1979) score += 10;
+                  if (prefs.era === 'modern' && year >= 1980 && year <= 1999) score += 10;
+                  if (prefs.era === 'contemporary' && year >= 2000) score += 10;
+              }
+              if (prefs.era === 'timeless') score += 1;
 
                 // Mood matching - updated for new genre structure
                 const moodMap = {
