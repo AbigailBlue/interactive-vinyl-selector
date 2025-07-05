@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Vinyl Collection Selector</title>
+        <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
         <style>
             :root {
                 --primary-bg: #2c1810;
@@ -650,8 +651,10 @@
                 // Genre matching - updated to reflect actual collection structure
                 if (prefs.genre !== 'surprise') {
                     const genreMap = {
-                        'rock': ['Rock', 'Hard Rock', 'Heavy Metal', 'Progressive Rock', 'Blues Rock', 'Indie Rock'],
-                        'jazz': ['Jazz', 'Jazz/Swing', 'Big Band/Swing', 'Bossa Nova', 'Latin Jazz', 'Jazz Rock', 'Jazz/Soul', 'Soul/Jazz', 'Vocal Jazz'],
+                        'rock': ['Rock', 'Hard Rock', 'Heavy Metal', 'Progressive Rock', 'Blues Rock', 'Indie
+    Rock'],
+                        'jazz': ['Jazz', 'Jazz/Swing', 'Big Band/Swing', 'Bossa Nova', 'Latin Jazz', 'Jazz
+    Rock', 'Jazz/Soul', 'Soul/Jazz', 'Vocal Jazz'],
                         'pop': ['Pop', 'Soft Rock', 'Pop/Rock', 'Synth-pop', 'Rock/Pop'],
                         'disco': ['Disco/Funk', 'Disco/R&B', 'Classical/Disco', 'Pop/Dance'],
                         'soul': ['Soul/R&B', 'R&B/Soul', 'Soul/Jazz', 'Jazz/Soul'],
@@ -686,7 +689,8 @@
                     'relaxed': ['Easy Listening', 'Jazz', 'Soft Rock', 'Vocal Jazz', 'Orchestral',
     'Hawaiian/Easy Listening', 'Bossa Nova', 'Jazz/Swing'],
                     'nostalgic': ['Country', 'Folk Rock', 'Gospel', 'Big Band/Swing', 'Vocal Pop', 'Folk/Pop'],
-                    'adventurous': ['Progressive Rock', 'New Wave', 'Jazz Rock', 'Soul/Psychedelic Rock', 'Indie Rock', 'Latin Jazz']
+                    'adventurous': ['Progressive Rock', 'New Wave', 'Jazz Rock', 'Soul/Psychedelic Rock', 'Indie
+     Rock', 'Latin Jazz']
                 };
 
                 const moodGenres = moodMap[prefs.mood] || [];
@@ -857,17 +861,24 @@
             }
 
             function basicSearch(searchTerm) {
-                const term = searchTerm.toLowerCase();
+                // Configure Fuse.js for fuzzy search
+                const fuseOptions = {
+                    threshold: 0.4,  // 0 = exact match, 1 = match anything
+                    keys: [
+                        'album',
+                        'artist',
+                        'year',
+                        'genre'
+                    ],
+                    includeScore: true,
+                    minMatchCharLength: 2
+                };
 
-                return vinylCollection.filter(album => {
-                    // Search across album, artist, year, and genre fields
-                    const albumMatch = album.album.toLowerCase().includes(term);
-                    const artistMatch = album.artist.toLowerCase().includes(term);
-                    const yearMatch = album.year.toString().includes(term);
-                    const genreMatch = album.genre.toLowerCase().includes(term);
+                const fuse = new Fuse(vinylCollection, fuseOptions);
+                const results = fuse.search(searchTerm);
 
-                    return albumMatch || artistMatch || yearMatch || genreMatch;
-                });
+                // Extract the actual album objects from Fuse results
+                return results.map(result => result.item);
             }
 
             function displaySearchResults(results, searchTerm) {
