@@ -22,7 +22,8 @@
 
             body {
                 font-family: 'Georgia', serif;
-                background: linear-gradient(135deg, var(--primary-bg) 0%, var(--secondary-bg) 50%, var(--tertiary-bg) 100%);
+                background: linear-gradient(135deg, var(--primary-bg) 0%, var(--secondary-bg) 50%,
+    var(--tertiary-bg) 100%);
                 min-height: 100vh;
                 color: var(--text-color);
                 line-height: 1.6;
@@ -214,15 +215,16 @@
 
             .fun-fact {
                 font-style: italic;
-                color:  var(--accent-color);
+                color: var(--accent-color);
                 background: rgba(0,0,0,0.2);
                 padding: 10px;
                 border-radius: 5px;
                 margin-top: 10px;
             }
+
             .era-golden .fun-fact {
-            background: #DDA0DD;
-              }
+                background: #DDA0DD;
+            }
 
             .reset-button {
                 background: rgba(255,255,255,0.1);
@@ -281,9 +283,9 @@
                 --primary-bg: #40E0D0;
                 --secondary-bg: #FFC0CB;
                 --tertiary-bg: #98FB98;
-                --text-color: #008B8B;
+                --text-color: #2F4F4F;
                 --heading-color: #008B8B;
-                --accent-color: #008B8B;
+                --accent-color: #4B0082;
             }
 
             .era-golden {
@@ -321,16 +323,121 @@
                 --heading-color: #FFD300;
                 --accent-color: #FF8500;
             }
+
             .user-selections-box {
-       background: rgba(255,255,255,0.05);
-       border: 1px solid rgba(255,255,255,0.2);
-       border-radius: 8px;
-       padding: 15px;
-       margin-top: 20px;
-       font-size: 0.9em;
-       color: var(--text-color);
-       text-align: center;
-       }
+                background: rgba(255,255,255,0.05);
+                border: 1px solid rgba(255,255,255,0.2);
+                border-radius: 8px;
+                padding: 15px;
+                margin-top: 20px;
+                font-size: 0.9em;
+                color: var(--text-color);
+                text-align: center;
+            }
+
+            /* Mode selector and search styling */
+            .mode-selector {
+                display: flex;
+                justify-content: center;
+                gap: 10px;
+                margin-bottom: 30px;
+                background: rgba(255,255,255,0.1);
+                border-radius: 15px;
+                padding: 10px;
+                backdrop-filter: blur(10px);
+            }
+
+            .mode-btn {
+                background: rgba(255,255,255,0.05);
+                border: 2px solid transparent;
+                border-radius: 10px;
+                padding: 12px 20px;
+                color: var(--text-color);
+                font-size: 1em;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                flex: 1;
+                max-width: 200px;
+            }
+
+            .mode-btn:hover {
+                background: rgba(255,255,255,0.15);
+                border-color: #f4d03f;
+            }
+
+            .mode-btn.active {
+                background: rgba(244, 208, 63, 0.2);
+                border-color: #f4d03f;
+                color: #f4d03f;
+            }
+
+            .search-section {
+                margin-bottom: 30px;
+            }
+
+            .search-container {
+                background: rgba(255,255,255,0.1);
+                border-radius: 15px;
+                padding: 20px;
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(255,255,255,0.2);
+            }
+
+            .search-input {
+                width: 100%;
+                background: rgba(255,255,255,0.05);
+                border: 2px solid rgba(255,255,255,0.2);
+                border-radius: 10px;
+                padding: 15px;
+                font-size: 1.1em;
+                color: var(--text-color);
+                margin-bottom: 15px;
+                font-family: 'Georgia', serif;
+            }
+
+            .search-input::placeholder {
+                color: rgba(255,255,255,0.5);
+            }
+
+            .search-input:focus {
+                outline: none;
+                border-color: #f4d03f;
+                background: rgba(255,255,255,0.1);
+            }
+
+            .search-btn {
+                background: linear-gradient(45deg, #8b4513, #d2691e);
+                color: white;
+                border: none;
+                padding: 12px 30px;
+                font-size: 1.1em;
+                border-radius: 25px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                display: block;
+                margin: 0 auto;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            }
+
+            .search-btn:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+            }
+
+            @media (max-width: 600px) {
+                .mode-selector {
+                    flex-direction: column;
+                    gap: 5px;
+                }
+
+                .mode-btn {
+                    max-width: none;
+                }
+
+                .search-input {
+                    font-size: 1em;
+                }
+            }
         </style>
     </head>
     <body>
@@ -346,17 +453,40 @@
             </div>
 
             <div id="error" class="error hidden">
-                ❌ Sorry, there was an error loading the vinyl collection. Please make sure the albums.json file is available.
+                ❌ Sorry, there was an error loading the vinyl collection. Please make sure the albums.json file
+     is available.
+            </div>
+
+            <div id="mode-selector" class="mode-selector hidden">
+                <button id="mood-mode-btn" class="mode-btn active" onclick="switchToMoodMode()">
+                    🎭 Browse by Mood
+                </button>
+                <button id="search-mode-btn" class="mode-btn" onclick="switchToSearchMode()">
+                    🔍 Quick Search
+                </button>
+            </div>
+
+            <div id="search-section" class="search-section hidden">
+                <div class="search-container">
+                    <input type="text" id="search-input" class="search-input" placeholder="Search albums,
+    artists, years, genres... (e.g., 'Jazz AND 1972')" />
+                    <button id="search-btn" class="search-btn" onclick="performSearch()">
+                        🔍 Search
+                    </button>
+                </div>
             </div>
 
             <div id="questionnaire" class="hidden">
                 <div class="question-card">
                     <div class="question">What's your current mood?</div>
                     <div class="options">
-                        <div class="option" data-question="mood" data-value="energetic">🔥 Energetic & Upbeat</div>
+                        <div class="option" data-question="mood" data-value="energetic">🔥 Energetic &
+    Upbeat</div>
                         <div class="option" data-question="mood" data-value="relaxed">😌 Relaxed & Chill</div>
-                        <div class="option" data-question="mood" data-value="nostalgic">💭 Nostalgic & Reflective</div>
-                        <div class="option" data-question="mood" data-value="adventurous">🎭 Adventurous & Experimental</div>
+                        <div class="option" data-question="mood" data-value="nostalgic">💭 Nostalgic &
+    Reflective</div>
+                        <div class="option" data-question="mood" data-value="adventurous">🎭 Adventurous &
+    Experimental</div>
                     </div>
                 </div>
 
@@ -369,8 +499,10 @@
                         <div class="option" data-question="genre" data-value="disco">🕺 Disco & Funk</div>
                         <div class="option" data-question="genre" data-value="soul">💫 Soul & R&B</div>
                         <div class="option" data-question="genre" data-value="country">🤠 Country & Folk</div>
-                        <div class="option" data-question="genre" data-value="easy">🎼 Easy Listening & Vocals</div>
-                        <div class="option" data-question="genre" data-value="newwave">🌊 New Wave & Alternative</div>
+                        <div class="option" data-question="genre" data-value="easy">🎼 Easy Listening &
+    Vocals</div>
+                        <div class="option" data-question="genre" data-value="newwave">🌊 New Wave &
+    Alternative</div>
                         <div class="option" data-question="genre" data-value="surprise">🎲 Surprise Me!</div>
                     </div>
                 </div>
@@ -378,22 +510,32 @@
                 <div class="question-card">
                     <div class="question">What era calls to you?</div>
                     <div class="options">
-                        <div class="option" data-question="era" data-value="early">🎭 Early Vintage (1920s-1934)</div>
-                        <div class="option" data-question="era" data-value="swing">🎺 Big Band/Swing (1935-1940s)</div>
-                        <div class="option" data-question="era" data-value="classic">🕰️ Classic (1950s-1964)</div>
-                        <div class="option" data-question="era" data-value="golden">✨ Golden Age (1965-1970s)</div>
-                        <div class="option" data-question="era" data-value="modern">🌟 Modern (1980s-1990s)</div>
-                        <div class="option" data-question="era" data-value="contemporary">💿 Contemporary (2000s+)</div>
-                        <div class="option" data-question="era" data-value="timeless">⭐ Era Doesn't Matter</div>
+                        <div class="option" data-question="era" data-value="early">🎭 Early Vintage
+    (1920s-1934)</div>
+                        <div class="option" data-question="era" data-value="swing">🎺 Big Band/Swing
+    (1935-1940s)</div>
+                        <div class="option" data-question="era" data-value="classic">🕰️ Classic
+    (1950s-1964)</div>
+                        <div class="option" data-question="era" data-value="golden">✨ Golden Age
+    (1965-1970s)</div>
+                        <div class="option" data-question="era" data-value="modern">🌟 Modern
+    (1980s-1990s)</div>
+                        <div class="option" data-question="era" data-value="contemporary">💿 Contemporary
+    (2000s+)</div>
+                        <div class="option" data-question="era" data-value="timeless">⭐ Era Doesn't
+    Matter</div>
                     </div>
                 </div>
 
                 <div class="question-card">
                     <div class="question">Are you looking for...</div>
                     <div class="options">
-                        <div class="option" data-question="familiarity" data-value="familiar">👑 A Classic Hit</div>
-                        <div class="option" data-question="familiarity" data-value="discovery">🔍 Something New to Discover</div>
-                        <div class="option" data-question="familiarity" data-value="either">🎯 Either is Fine</div>
+                        <div class="option" data-question="familiarity" data-value="familiar">👑 A Classic
+    Hit</div>
+                        <div class="option" data-question="familiarity" data-value="discovery">🔍 Something New
+    to Discover</div>
+                        <div class="option" data-question="familiarity" data-value="either">🎯 Either is
+    Fine</div>
                     </div>
                 </div>
 
@@ -404,14 +546,14 @@
 
             <div id="results" class="hidden">
                 <div class="recommendations">
-                    <h2 style="color: var(--heading-color); text-align: center; margin-bottom: 30px; font-size: 2em;">🎵 Perfect Picks for
-    You</h2>
+                    <h2 style="color: var(--heading-color); text-align: center; margin-bottom: 30px; font-size:
+    2em;">🎵 Perfect Picks for You</h2>
                     <div id="recommendation-list"></div>
                     <button class="reset-button" onclick="resetQuiz()">🔄 Try Again</button>
-                            <div id="user-selections" class="user-selections-box"></div>
-                       </div>
-                   </div>
-               </div>
+                    <div id="user-selections" class="user-selections-box"></div>
+                </div>
+            </div>
+        </div>
 
         <script>
             // Global variables
@@ -428,8 +570,9 @@
                     const data = await response.json();
                     vinylCollection = data;
 
-                    // Hide loading, show questionnaire
+                    // Hide loading, show mode selector and questionnaire
                     document.getElementById('loading').classList.add('hidden');
+                    document.getElementById('mode-selector').classList.remove('hidden');
                     document.getElementById('questionnaire').classList.remove('hidden');
 
                     console.log(`Loaded ${vinylCollection.length} albums from albums.json`);
@@ -507,14 +650,16 @@
                 // Genre matching - updated to reflect actual collection structure
                 if (prefs.genre !== 'surprise') {
                     const genreMap = {
-                        'rock': ['Rock', 'Hard Rock', 'Heavy Metal', 'Progressive Rock', 'Blues Rock', 'Indie Rock'],
-                        'jazz': ['Jazz', 'Jazz/Swing', 'Big Band/Swing', 'Bossa Nova', 'Latin Jazz', 'Jazz Rock', 'Jazz/Soul', 'Soul/Jazz',
-    'Vocal Jazz'],
+                        'rock': ['Rock', 'Hard Rock', 'Heavy Metal', 'Progressive Rock', 'Blues Rock', 'Indie
+    Rock'],
+                        'jazz': ['Jazz', 'Jazz/Swing', 'Big Band/Swing', 'Bossa Nova', 'Latin Jazz', 'Jazz
+    Rock', 'Jazz/Soul', 'Soul/Jazz', 'Vocal Jazz'],
                         'pop': ['Pop', 'Soft Rock', 'Pop/Rock', 'Synth-pop', 'Rock/Pop'],
                         'disco': ['Disco/Funk', 'Disco/R&B', 'Classical/Disco', 'Pop/Dance'],
                         'soul': ['Soul/R&B', 'R&B/Soul', 'Soul/Jazz', 'Jazz/Soul'],
                         'country': ['Country', 'Folk Rock', 'Gospel', 'Country/Pop', 'Folk/Pop'],
-                        'easy': ['Easy Listening', 'Vocal Jazz', 'Orchestral', 'Easy Listening/Pop', 'Vocal/Pop', 'Vocal Pop', 'Orchestral/Easy Listening', 'Pop/Easy Listening', 'Hawaiian/Easy Listening'],
+                        'easy': ['Easy Listening', 'Vocal Jazz', 'Orchestral', 'Easy Listening/Pop',
+    'Vocal/Pop', 'Vocal Pop', 'Orchestral/Easy Listening', 'Pop/Easy Listening', 'Hawaiian/Easy Listening'],
                         'newwave': ['New Wave/Pop', 'New Wave/Rock', 'Indie Rock', 'Soul/Psychedelic Rock']
                     };
 
@@ -526,25 +671,25 @@
                     score += 1; // Small bonus for surprise selection
                 }
 
-                 // Era matching - clean boundaries with no overlaps
-              const year = parseInt(album.year);
-              if (year && !isNaN(year)) {
-                  if (prefs.era === 'early' && year >= 1920 && year <= 1934) score += 10;
-                  if (prefs.era === 'swing' && year >= 1935 && year <= 1949) score += 10;
-                  if (prefs.era === 'classic' && year >= 1950 && year <= 1964) score += 10;
-                  if (prefs.era === 'golden' && year >= 1965 && year <= 1979) score += 10;
-                  if (prefs.era === 'modern' && year >= 1980 && year <= 1999) score += 10;
-                  if (prefs.era === 'contemporary' && year >= 2000) score += 10;
-              }
-              if (prefs.era === 'timeless') score += 1;
+                // Era matching - clean boundaries with no overlaps
+                const year = parseInt(album.year) || 1970;
+                if (prefs.era === 'early' && year >= 1920 && year <= 1934) score += 2;
+                if (prefs.era === 'swing' && year >= 1935 && year <= 1949) score += 2;
+                if (prefs.era === 'classic' && year >= 1950 && year <= 1964) score += 2;
+                if (prefs.era === 'golden' && year >= 1965 && year <= 1979) score += 2;
+                if (prefs.era === 'modern' && year >= 1980 && year <= 1999) score += 2;
+                if (prefs.era === 'contemporary' && year >= 2000) score += 2;
+                if (prefs.era === 'timeless') score += 1;
 
                 // Mood matching - updated for new genre structure
                 const moodMap = {
-                    'energetic': ['Rock', 'Hard Rock', 'Heavy Metal', 'Disco/Funk', 'Disco/R&B', 'New Wave', 'Progressive Rock', 'Pop/Dance'],
-                    'relaxed': ['Easy Listening', 'Jazz', 'Soft Rock', 'Vocal Jazz', 'Orchestral', 'Hawaiian/Easy Listening', 'Bossa Nova',
-    'Jazz/Swing'],
+                    'energetic': ['Rock', 'Hard Rock', 'Heavy Metal', 'Disco/Funk', 'Disco/R&B', 'New Wave',
+    'Progressive Rock', 'Pop/Dance'],
+                    'relaxed': ['Easy Listening', 'Jazz', 'Soft Rock', 'Vocal Jazz', 'Orchestral',
+    'Hawaiian/Easy Listening', 'Bossa Nova', 'Jazz/Swing'],
                     'nostalgic': ['Country', 'Folk Rock', 'Gospel', 'Big Band/Swing', 'Vocal Pop', 'Folk/Pop'],
-                    'adventurous': ['Progressive Rock', 'New Wave', 'Jazz Rock', 'Soul/Psychedelic Rock', 'Indie Rock', 'Latin Jazz']
+                    'adventurous': ['Progressive Rock', 'New Wave', 'Jazz Rock', 'Soul/Psychedelic Rock', 'Indie
+     Rock', 'Latin Jazz']
                 };
 
                 const moodGenres = moodMap[prefs.mood] || [];
@@ -593,9 +738,9 @@
                     </div>
                 `).join('');
 
-             // Show user selections
-       displayUserSelections();
-          
+                // Show user selections
+                displayUserSelections();
+
                 // Scroll to results
                 results.scrollIntoView({ behavior: 'smooth' });
             }
@@ -605,62 +750,121 @@
                 const body = document.body;
 
                 // Remove any existing era classes
-                body.classList.remove('era-early', 'era-swing', 'era-classic', 'era-golden', 'era-modern', 'era-contemporary', 'era-timeless');
+                body.classList.remove('era-early', 'era-swing', 'era-classic', 'era-golden', 'era-modern',
+    'era-contemporary', 'era-timeless');
 
                 // Add the appropriate era class
                 if (era) {
                     body.classList.add(`era-${era}`);
                 }
             }
- function displayUserSelections() {
- const selectionBox = document.getElementById('user-selections');
- 
- // Define label mappings
-                     const labels = {
-                         mood: {
-                             'energetic': 'Energetic & Upbeat',
-                             'relaxed': 'Relaxed & Chill',
-                             'nostalgic': 'Nostalgic & Reflective',
-                             'adventurous': 'Adventurous & Experimental'
-                         },
-                         genre: {
-                             'rock': 'Rock & Metal',
-                             'jazz': 'Jazz & Swing',
-                             'pop': 'Pop & Soft Rock',
-                             'disco': 'Disco & Funk',
-                             'soul': 'Soul & R&B',
-                             'country': 'Country & Folk',
-                             'easy': 'Easy Listening & Vocals',
-                             'newwave': 'New Wave & Alternative',
-                             'surprise': 'Surprise Me!'
-                         },
-                         era: {
-                             'early': 'Early Vintage (1920s-1934)',
-                             'swing': 'Big Band/Swing (1935-1940s)',
-                             'classic': 'Classic (1950s-1964)',
-                             'golden': 'Golden Age (1965-1970s)',
-                             'modern': 'Modern (1980s-1990s)',
-                             'contemporary': 'Contemporary (2000s+)',
-                             'timeless': 'Era Doesn\'t Matter'
-                         },
-                         familiarity: {
-                             'familiar': 'A Classic Hit',
-                             'discovery': 'Something New to Discover',
-                             'either': 'Either is Fine'
-                         }
-                     };
-       
-                     // Build the selections string
-                     const selections = [
-                         labels.mood[userPreferences.mood],
-                         labels.genre[userPreferences.genre],
-                         labels.era[userPreferences.era],
-                         labels.familiarity[userPreferences.familiarity]
-                     ].filter(Boolean).join(' • ');
-       
-                     selectionBox.innerHTML = `<strong>Your selections:</strong> ${selections}`;
-                 }
-            
+
+            function displayUserSelections() {
+                const selectionBox = document.getElementById('user-selections');
+
+                // Define label mappings
+                const labels = {
+                    mood: {
+                        'energetic': 'Energetic & Upbeat',
+                        'relaxed': 'Relaxed & Chill',
+                        'nostalgic': 'Nostalgic & Reflective',
+                        'adventurous': 'Adventurous & Experimental'
+                    },
+                    genre: {
+                        'rock': 'Rock & Metal',
+                        'jazz': 'Jazz & Swing',
+                        'pop': 'Pop & Soft Rock',
+                        'disco': 'Disco & Funk',
+                        'soul': 'Soul & R&B',
+                        'country': 'Country & Folk',
+                        'easy': 'Easy Listening & Vocals',
+                        'newwave': 'New Wave & Alternative',
+                        'surprise': 'Surprise Me!'
+                    },
+                    era: {
+                        'early': 'Early Vintage (1920s-1934)',
+                        'swing': 'Big Band/Swing (1935-1940s)',
+                        'classic': 'Classic (1950s-1964)',
+                        'golden': 'Golden Age (1965-1970s)',
+                        'modern': 'Modern (1980s-1990s)',
+                        'contemporary': 'Contemporary (2000s+)',
+                        'timeless': 'Era Doesn\'t Matter'
+                    },
+                    familiarity: {
+                        'familiar': 'A Classic Hit',
+                        'discovery': 'Something New to Discover',
+                        'either': 'Either is Fine'
+                    }
+                };
+
+                // Build the selections string
+                const selections = [
+                    labels.mood[userPreferences.mood],
+                    labels.genre[userPreferences.genre],
+                    labels.era[userPreferences.era],
+                    labels.familiarity[userPreferences.familiarity]
+                ].filter(Boolean).join(' • ');
+
+                selectionBox.innerHTML = `<strong>Your selections:</strong> ${selections}`;
+            }
+
+            // Mode switching functions
+            function switchToMoodMode() {
+                // Update button states
+                document.getElementById('mood-mode-btn').classList.add('active');
+                document.getElementById('search-mode-btn').classList.remove('active');
+
+                // Show questionnaire, hide search
+                document.getElementById('questionnaire').classList.remove('hidden');
+                document.getElementById('search-section').classList.add('hidden');
+
+                // Hide any search results
+                document.getElementById('results').classList.add('hidden');
+
+                // Remove any era themes (since search doesn't use them)
+                document.body.classList.remove('era-early', 'era-swing', 'era-classic', 'era-golden',
+    'era-modern', 'era-contemporary', 'era-timeless');
+            }
+
+            function switchToSearchMode() {
+                // Update button states
+                document.getElementById('search-mode-btn').classList.add('active');
+                document.getElementById('mood-mode-btn').classList.remove('active');
+
+                // Show search, hide questionnaire
+                document.getElementById('search-section').classList.remove('hidden');
+                document.getElementById('questionnaire').classList.add('hidden');
+
+                // Hide any mood-based results
+                document.getElementById('results').classList.add('hidden');
+
+                // Focus on search input for better UX
+                document.getElementById('search-input').focus();
+            }
+
+            function performSearch() {
+                const searchTerm = document.getElementById('search-input').value.trim();
+                if (!searchTerm) {
+                    alert('Please enter a search term');
+                    return;
+                }
+
+                // Placeholder for now - we'll implement actual search in Step 2
+                alert(`Searching for: "${searchTerm}"\n\nSearch functionality coming in Step 2!`);
+            }
+
+            // Allow Enter key to trigger search
+            document.addEventListener('DOMContentLoaded', function() {
+                const searchInput = document.getElementById('search-input');
+                if (searchInput) {
+                    searchInput.addEventListener('keypress', function(e) {
+                        if (e.key === 'Enter') {
+                            performSearch();
+                        }
+                    });
+                }
+            });
+
             function resetQuiz() {
                 userPreferences = {};
 
@@ -679,8 +883,8 @@
                 document.getElementById('results').classList.add('hidden');
 
                 // Remove era theme
-                document.body.classList.remove('era-early', 'era-swing', 'era-classic', 'era-golden', 'era-modern', 'era-contemporary',
-    'era-timeless');
+                document.body.classList.remove('era-early', 'era-swing', 'era-classic', 'era-golden',
+    'era-modern', 'era-contemporary', 'era-timeless');
 
                 // Scroll to top
                 window.scrollTo({ top: 0, behavior: 'smooth' });
