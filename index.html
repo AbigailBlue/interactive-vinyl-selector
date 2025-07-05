@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
     <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -651,15 +651,41 @@
                 // Genre matching - updated to reflect actual collection structure
                 if (prefs.genre !== 'surprise') {
                     const genreMap = {
-                        'rock': ['Rock', 'Hard Rock', 'Heavy Metal', 'Progressive Rock', 'Blues Rock', 'Indie Rock'],
-                        'jazz': ['Jazz', 'Jazz/Swing', 'Big Band/Swing', 'Bossa Nova', 'Latin Jazz', 'Jazz Rock', 'Jazz/Soul', 'Soul/Jazz', 'Vocal Jazz'],
-                        'pop': ['Pop', 'Soft Rock', 'Pop/Rock', 'Synth-pop', 'Rock/Pop'],
-                        'disco': ['Disco/Funk', 'Disco/R&B', 'Classical/Disco', 'Pop/Dance'],
-                        'soul': ['Soul/R&B', 'R&B/Soul', 'Soul/Jazz', 'Jazz/Soul'],
-                        'country': ['Country', 'Folk Rock', 'Gospel', 'Country/Pop', 'Folk/Pop'],
-                        'easy': ['Easy Listening', 'Vocal Jazz', 'Orchestral', 'Easy Listening/Pop',
-    'Vocal/Pop', 'Vocal Pop', 'Orchestral/Easy Listening', 'Pop/Easy Listening', 'Hawaiian/Easy Listening'],
-                        'newwave': ['New Wave/Pop', 'New Wave/Rock', 'Indie Rock', 'Soul/Psychedelic Rock']
+                        'rock': [
+                            'Rock', 'Hard Rock', 'Heavy Metal',
+                            'Progressive Rock', 'Blues Rock', 'Indie Rock'
+                        ],
+                        'jazz': [
+                            'Jazz', 'Jazz/Swing', 'Big Band/Swing',
+                            'Bossa Nova', 'Latin Jazz', 'Jazz Rock',
+                            'Jazz/Soul', 'Soul/Jazz', 'Vocal Jazz'
+                        ],
+                        'pop': [
+                            'Pop', 'Soft Rock', 'Pop/Rock',
+                            'Synth-pop', 'Rock/Pop'
+                        ],
+                        'disco': [
+                            'Disco/Funk', 'Disco/R&B',
+                            'Classical/Disco', 'Pop/Dance'
+                        ],
+                        'soul': [
+                            'Soul/R&B', 'R&B/Soul',
+                            'Soul/Jazz', 'Jazz/Soul'
+                        ],
+                        'country': [
+                            'Country', 'Folk Rock', 'Gospel',
+                            'Country/Pop', 'Folk/Pop'
+                        ],
+                        'easy': [
+                            'Easy Listening', 'Vocal Jazz', 'Orchestral',
+                            'Easy Listening/Pop', 'Vocal/Pop', 'Vocal Pop',
+                            'Orchestral/Easy Listening', 'Pop/Easy Listening',
+                            'Hawaiian/Easy Listening'
+                        ],
+                        'newwave': [
+                            'New Wave/Pop', 'New Wave/Rock',
+                            'Indie Rock', 'Soul/Psychedelic Rock'
+                        ]
                     };
 
                     const targetGenres = genreMap[prefs.genre] || [];
@@ -682,12 +708,24 @@
 
                 // Mood matching - updated for new genre structure
                 const moodMap = {
-                    'energetic': ['Rock', 'Hard Rock', 'Heavy Metal', 'Disco/Funk', 'Disco/R&B', 'New Wave',
-    'Progressive Rock', 'Pop/Dance'],
-                    'relaxed': ['Easy Listening', 'Jazz', 'Soft Rock', 'Vocal Jazz', 'Orchestral',
-    'Hawaiian/Easy Listening', 'Bossa Nova', 'Jazz/Swing'],
-                    'nostalgic': ['Country', 'Folk Rock', 'Gospel', 'Big Band/Swing', 'Vocal Pop', 'Folk/Pop'],
-                    'adventurous': ['Progressive Rock', 'New Wave', 'Jazz Rock', 'Soul/Psychedelic Rock', 'Indie Rock', 'Latin Jazz']
+                    'energetic': [
+                        'Rock', 'Hard Rock', 'Heavy Metal',
+                        'Disco/Funk', 'Disco/R&B', 'New Wave',
+                        'Progressive Rock', 'Pop/Dance'
+                    ],
+                    'relaxed': [
+                        'Easy Listening', 'Jazz', 'Soft Rock',
+                        'Vocal Jazz', 'Orchestral', 'Hawaiian/Easy Listening',
+                        'Bossa Nova', 'Jazz/Swing'
+                    ],
+                    'nostalgic': [
+                        'Country', 'Folk Rock', 'Gospel',
+                        'Big Band/Swing', 'Vocal Pop', 'Folk/Pop'
+                    ],
+                    'adventurous': [
+                        'Progressive Rock', 'New Wave', 'Jazz Rock',
+                        'Soul/Psychedelic Rock', 'Indie Rock', 'Latin Jazz'
+                    ]
                 };
 
                 const moodGenres = moodMap[prefs.mood] || [];
@@ -860,7 +898,7 @@
             function basicSearch(searchTerm) {
                 // Configure Fuse.js for fuzzy search
                 const fuseOptions = {
-                    threshold: 0.4,  // 0 = exact match, 1 = match anything
+                    threshold: 0.2,  // Tighter threshold for more accurate matches
                     keys: [
                         'album',
                         'artist',
@@ -906,7 +944,6 @@
                             <div class="album-title">${album.album}</div>
                             <div class="artist-name">by ${album.artist}</div>
                             <div class="album-details">${album.year} • ${album.genre}</div>
-                            <div class="fun-fact">💡 ${album.funFact}</div>
                         </div>
                     `).join('');
                 }
