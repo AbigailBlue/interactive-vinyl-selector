@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+!DOCTYPE html>
     <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -650,12 +650,10 @@
                 // Genre matching - updated to reflect actual collection structure
                 if (prefs.genre !== 'surprise') {
                     const genreMap = {
-                        'rock': ['Rock', 'Hard Rock', 'Heavy Metal', 'Progressive Rock', 'Blues Rock', 'Indie Rock'],
-                        'jazz': [
-                                'Jazz', 'Jazz/Swing', 'Big Band/Swing',
-                                'Bossa Nova', 'Latin Jazz', 'Jazz Rock',
-                                'Jazz/Soul', 'Soul/Jazz', 'Vocal Jazz'
-                            ],
+                        'rock': ['Rock', 'Hard Rock', 'Heavy Metal', 'Progressive Rock', 'Blues Rock', 'Indie
+    Rock'],
+                        'jazz': ['Jazz', 'Jazz/Swing', 'Big Band/Swing', 'Bossa Nova', 'Latin Jazz', 'Jazz
+    Rock', 'Jazz/Soul', 'Soul/Jazz', 'Vocal Jazz'],
                         'pop': ['Pop', 'Soft Rock', 'Pop/Rock', 'Synth-pop', 'Rock/Pop'],
                         'disco': ['Disco/Funk', 'Disco/R&B', 'Classical/Disco', 'Pop/Dance'],
                         'soul': ['Soul/R&B', 'R&B/Soul', 'Soul/Jazz', 'Jazz/Soul'],
@@ -690,7 +688,8 @@
                     'relaxed': ['Easy Listening', 'Jazz', 'Soft Rock', 'Vocal Jazz', 'Orchestral',
     'Hawaiian/Easy Listening', 'Bossa Nova', 'Jazz/Swing'],
                     'nostalgic': ['Country', 'Folk Rock', 'Gospel', 'Big Band/Swing', 'Vocal Pop', 'Folk/Pop'],
-                    'adventurous': ['Progressive Rock', 'New Wave', 'Jazz Rock', 'Soul/Psychedelic Rock', 'Indie Rock', 'Latin Jazz']
+                    'adventurous': ['Progressive Rock', 'New Wave', 'Jazz Rock', 'Soul/Psychedelic Rock', 'Indie
+     Rock', 'Latin Jazz']
                 };
 
                 const moodGenres = moodMap[prefs.mood] || [];
@@ -850,8 +849,69 @@
                     return;
                 }
 
-                // Placeholder for now - we'll implement actual search in Step 2
-                alert(`Searching for: "${searchTerm}"\n\nSearch functionality coming in Step 2!`);
+                if (vinylCollection.length === 0) {
+                    alert('Vinyl collection not loaded yet. Please try again.');
+                    return;
+                }
+
+                // Perform basic search across all fields
+                const searchResults = basicSearch(searchTerm);
+                displaySearchResults(searchResults, searchTerm);
+            }
+
+            function basicSearch(searchTerm) {
+                const term = searchTerm.toLowerCase();
+
+                return vinylCollection.filter(album => {
+                    // Search across album, artist, year, and genre fields
+                    const albumMatch = album.album.toLowerCase().includes(term);
+                    const artistMatch = album.artist.toLowerCase().includes(term);
+                    const yearMatch = album.year.toString().includes(term);
+                    const genreMatch = album.genre.toLowerCase().includes(term);
+
+                    return albumMatch || artistMatch || yearMatch || genreMatch;
+                });
+            }
+
+            function displaySearchResults(results, searchTerm) {
+                const questionnaire = document.getElementById('questionnaire');
+                const resultsDiv = document.getElementById('results');
+                const list = document.getElementById('recommendation-list');
+                const userSelections = document.getElementById('user-selections');
+
+                // Hide questionnaire, show results
+                questionnaire.classList.add('hidden');
+                resultsDiv.classList.remove('hidden');
+
+                // Update heading for search results
+                const heading = resultsDiv.querySelector('h2');
+                heading.innerHTML = `🔍 Search Results for "${searchTerm}"`;
+
+                // Display results in card format
+                if (results.length === 0) {
+                    list.innerHTML = `
+                        <div class="recommendation-item">
+                            <div class="album-title">No albums found</div>
+                            <div class="artist-name">Try a different search term or check your spelling</div>
+                        </div>
+                    `;
+                } else {
+                    list.innerHTML = results.map((album, index) => `
+                        <div class="recommendation-item">
+                            <div class="album-title">${album.album}</div>
+                            <div class="artist-name">by ${album.artist}</div>
+                            <div class="album-details">${album.year} • ${album.genre}</div>
+                            <div class="fun-fact">💡 ${album.funFact}</div>
+                        </div>
+                    `).join('');
+                }
+
+                // Show search summary instead of user selections
+                userSelections.innerHTML = `<strong>Found ${results.length} album(s) matching
+    "${searchTerm}"</strong>`;
+
+                // Scroll to results
+                resultsDiv.scrollIntoView({ behavior: 'smooth' });
             }
 
             // Allow Enter key to trigger search
