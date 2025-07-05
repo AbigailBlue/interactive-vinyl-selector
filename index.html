@@ -991,6 +991,11 @@
             }
 
             function fuzzySearchTerm(term) {
+             // Check if term is a 4-digit year - if so, use exact matching
+              if (/^\d{4}$/.test(term)) {
+                  return vinylCollection.filter(album => album.year === term);
+                }
+       
                 const fuseOptions = {
                     threshold: 0.25,
                     keys: ['album', 'artist', 'year', 'genre'],
