@@ -1,1090 +1,1159 @@
- <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Vinyl Collection Selector</title>
-        <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
-        <style>
-            :root {
-                --primary-bg: #2c1810;
-                --secondary-bg: #8b4513;
-                --tertiary-bg: #654321;
-                --text-color: #f4f1ea;
-                --heading-color: #f4d03f;
-                --accent-color: #f4d03f;
-            }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vinyl Collection Selector</title>
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
+    <style>
+        :root {
+            --primary-bg: #2c1810;
+            --secondary-bg: #8b4513;
+            --tertiary-bg: #654321;
+            --text-color: #f4f1ea;
+            --heading-color: #f4d03f;
+            --accent-color: #f4d03f;
+        }
 
-            * {
-                margin: 0;
-                padding: 0;
-                box-sizing: border-box;
-            }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-            body {
-                font-family: 'Georgia', serif;
-                background: linear-gradient(135deg, var(--primary-bg) 0%, var(--secondary-bg) 50%,
-    var(--tertiary-bg) 100%);
-                min-height: 100vh;
-                color: var(--text-color);
-                line-height: 1.6;
-            }
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, var(--primary-bg) 0%, var(--secondary-bg) 50%, var(--tertiary-bg) 100%);
+            min-height: 100vh;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
 
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px 0;
+            background: rgba(0,0,0,0.3);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .vinyl-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: #1a1a1a;
+            border-radius: 50%;
+            position: relative;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+        }
+
+        .vinyl-icon::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            background: #8b4513;
+            border-radius: 50%;
+        }
+
+        .vinyl-icon::after {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 2px solid #444;
+            border-radius: 50%;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: #f4d03f;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            color: #d5dbdb;
+            font-style: italic;
+        }
+
+        .loading {
+            text-align: center;
+            font-size: 1.2em;
+            color: #f4d03f;
+            margin: 50px 0;
+        }
+
+        .error {
+            text-align: center;
+            font-size: 1.1em;
+            color: #ff6b6b;
+            background: rgba(255, 107, 107, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 30px 0;
+            border: 1px solid rgba(255, 107, 107, 0.3);
+        }
+
+        .question-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        }
+
+        .question {
+            font-size: 1.4em;
+            margin-bottom: 20px;
+            color: #f4d03f;
+            font-weight: bold;
+        }
+
+        .options {
+            display: grid;
+            gap: 15px;
+        }
+
+        .option {
+            background: rgba(255,255,255,0.05);
+            border: 2px solid transparent;
+            border-radius: 10px;
+            padding: 15px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1em;
+        }
+
+        .option:hover {
+            background: rgba(255,255,255,0.15);
+            border-color: #f4d03f;
+            transform: translateY(-2px);
+        }
+
+        .option.selected {
+            background: rgba(244, 208, 63, 0.2);
+            border-color: #f4d03f;
+            color: #f4d03f;
+        }
+
+        .get-recommendation {
+            background: linear-gradient(45deg, #8b4513, #d2691e);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.3em;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 20px auto;
+            display: block;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .get-recommendation:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+        }
+
+        .get-recommendation:disabled {
+            background: #666;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .recommendations {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .recommendation-item {
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid #f4d03f;
+        }
+
+        .album-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: var(--heading-color);
+            margin-bottom: 5px;
+        }
+
+        .artist-name {
+            font-size: 1.1em;
+            color: var(--text-color);
+            margin-bottom: 10px;
+        }
+
+        .album-details {
+            font-size: 0.9em;
+            color: var(--text-color);
+            margin-bottom: 10px;
+        }
+
+        .fun-fact {
+            font-style: italic;
+            color: var(--accent-color);
+            background: rgba(0,0,0,0.2);
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .era-golden .fun-fact {
+            background: #DDA0DD;
+        }
+
+        .reset-button {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            margin: 20px auto;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .reset-button:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 600px) {
             .container {
-                max-width: 800px;
-                margin: 0 auto;
-                padding: 20px;
+                padding: 10px;
             }
-
-            .header {
-                text-align: center;
-                margin-bottom: 40px;
-                padding: 30px 0;
-                background: rgba(0,0,0,0.3);
-                border-radius: 15px;
-                backdrop-filter: blur(10px);
-            }
-
-            .vinyl-icon {
-                width: 80px;
-                height: 80px;
-                margin: 0 auto 20px;
-                background: #1a1a1a;
-                border-radius: 50%;
-                position: relative;
-                box-shadow: 0 5px 20px rgba(0,0,0,0.5);
-            }
-
-            .vinyl-icon::before {
-                content: '';
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                width: 20px;
-                height: 20px;
-                background: #8b4513;
-                border-radius: 50%;
-            }
-
-            .vinyl-icon::after {
-                content: '';
-                position: absolute;
-                top: 10px;
-                left: 10px;
-                right: 10px;
-                bottom: 10px;
-                border: 2px solid #444;
-                border-radius: 50%;
-            }
-
+            
             h1 {
-                font-size: 2.5em;
-                margin-bottom: 10px;
-                color: #f4d03f;
-                text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+                font-size: 2em;
             }
-
-            .subtitle {
-                font-size: 1.2em;
-                color: #d5dbdb;
-                font-style: italic;
-            }
-
-            .loading {
-                text-align: center;
-                font-size: 1.2em;
-                color: #f4d03f;
-                margin: 50px 0;
-            }
-
-            .error {
-                text-align: center;
-                font-size: 1.1em;
-                color: #ff6b6b;
-                background: rgba(255, 107, 107, 0.1);
-                padding: 20px;
-                border-radius: 10px;
-                margin: 30px 0;
-                border: 1px solid rgba(255, 107, 107, 0.3);
-            }
-
+            
             .question-card {
-                background: rgba(255,255,255,0.1);
-                border-radius: 15px;
-                padding: 30px;
-                margin-bottom: 30px;
-                backdrop-filter: blur(10px);
-                border: 1px solid rgba(255,255,255,0.2);
-                box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-            }
-
-            .question {
-                font-size: 1.4em;
-                margin-bottom: 20px;
-                color: #f4d03f;
-                font-weight: bold;
-            }
-
-            .options {
-                display: grid;
-                gap: 15px;
-            }
-
-            .option {
-                background: rgba(255,255,255,0.05);
-                border: 2px solid transparent;
-                border-radius: 10px;
-                padding: 15px 20px;
-                cursor: pointer;
-                transition: all 0.3s ease;
-                font-size: 1.1em;
-            }
-
-            .option:hover {
-                background: rgba(255,255,255,0.15);
-                border-color: #f4d03f;
-                transform: translateY(-2px);
-            }
-
-            .option.selected {
-                background: rgba(244, 208, 63, 0.2);
-                border-color: #f4d03f;
-                color: #f4d03f;
-            }
-
-            .get-recommendation {
-                background: linear-gradient(45deg, #8b4513, #d2691e);
-                color: white;
-                border: none;
-                padding: 15px 40px;
-                font-size: 1.3em;
-                border-radius: 25px;
-                cursor: pointer;
-                transition: all 0.3s ease;
-                margin: 20px auto;
-                display: block;
-                box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            }
-
-            .get-recommendation:hover {
-                transform: translateY(-3px);
-                box-shadow: 0 8px 25px rgba(0,0,0,0.4);
-            }
-
-            .get-recommendation:disabled {
-                background: #666;
-                cursor: not-allowed;
-                transform: none;
-            }
-
-            .recommendations {
-                background: rgba(255,255,255,0.1);
-                border-radius: 15px;
-                padding: 30px;
-                margin-top: 30px;
-                backdrop-filter: blur(10px);
-                border: 1px solid rgba(255,255,255,0.2);
-            }
-
-            .recommendation-item {
-                background: rgba(255,255,255,0.05);
-                border-radius: 10px;
                 padding: 20px;
-                margin-bottom: 20px;
-                border-left: 4px solid #f4d03f;
             }
+        }
 
-            .album-title {
-                font-size: 1.3em;
-                font-weight: bold;
-                color: var(--heading-color);
-                margin-bottom: 5px;
-            }
+        /* Era-specific themes */
+        .era-early {
+            --primary-bg: #D4AF37;
+            --secondary-bg: #0F0F0F;
+            --tertiary-bg: #FFFFF0;
+            --text-color: #0F0F0F;
+            --heading-color: #8B4513;
+            --accent-color: #90EE90;
+        }
 
-            .artist-name {
-                font-size: 1.1em;
-                color: var(--text-color);
-                margin-bottom: 10px;
-            }
+        .era-swing {
+            --primary-bg: #6B8E23;
+            --secondary-bg: #8B0000;
+            --tertiary-bg: #F5F5DC;
+            --text-color: #F5F5DC;
+            --heading-color: #8B0000;
+            --accent-color: #F5F5DC;
+        }
 
-            .album-details {
-                font-size: 0.9em;
-                color: var(--text-color);
-                margin-bottom: 10px;
-            }
+        .era-classic {
+            --primary-bg: #40E0D0;
+            --secondary-bg: #FFC0CB;
+            --tertiary-bg: #98FB98;
+            --text-color: #2F4F4F;
+            --heading-color: #008B8B;
+            --accent-color: #4B0082;
+        }
 
-            .fun-fact {
-                font-style: italic;
-                color: var(--accent-color);
-                background: rgba(0,0,0,0.2);
-                padding: 10px;
-                border-radius: 5px;
-                margin-top: 10px;
-            }
+        .era-golden {
+            --primary-bg: #FF1493;
+            --secondary-bg: #0080FF;
+            --tertiary-bg: #32CD32;
+            --text-color: #FFFFFF;
+            --heading-color: #FFFF00;
+            --accent-color: #00FFFF;
+        }
 
-            .era-golden .fun-fact {
-                background: #DDA0DD;
-            }
+        .era-modern {
+            --primary-bg: #FF10F0;
+            --secondary-bg: #BF00FF;
+            --tertiary-bg: #00FFFF;
+            --text-color: #FFFFFF;
+            --heading-color: #00FF00;
+            --accent-color: #0099FF;
+        }
 
-            .reset-button {
-                background: rgba(255,255,255,0.1);
-                color: white;
-                border: 1px solid rgba(255,255,255,0.3);
-                padding: 10px 20px;
-                border-radius: 20px;
-                cursor: pointer;
-                margin: 20px auto;
-                display: block;
-                transition: all 0.3s ease;
-            }
+        .era-contemporary {
+            --primary-bg: #C0C0C0;
+            --secondary-bg: #4F94CD;
+            --tertiary-bg: #00FF32;
+            --text-color: #000000;
+            --heading-color: #9932CC;
+            --accent-color: #FF7F00;
+        }
 
-            .reset-button:hover {
-                background: rgba(255,255,255,0.2);
-            }
+        .era-timeless {
+            --primary-bg: #6A0DAD;
+            --secondary-bg: #39FF14;
+            --tertiary-bg: #FF006E;
+            --text-color: #FFFFFF;
+            --heading-color: #FFD300;
+            --accent-color: #FF8500;
+        }
 
-            .hidden {
-                display: none;
-            }
+        .user-selections-box {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: var(--text-color);
+            text-align: center;
+        }
 
-            @media (max-width: 600px) {
-                .container {
-                    padding: 10px;
-                }
+        /* Mode selector and search styling */
+        .mode-selector {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 10px;
+            backdrop-filter: blur(10px);
+        }
 
-                h1 {
-                    font-size: 2em;
-                }
+        .mode-btn {
+            background: rgba(255,255,255,0.05);
+            border: 2px solid transparent;
+            border-radius: 10px;
+            padding: 12px 20px;
+            color: var(--text-color);
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex: 1;
+            max-width: 200px;
+        }
 
-                .question-card {
-                    padding: 20px;
-                }
-            }
+        .mode-btn:hover {
+            background: rgba(255,255,255,0.15);
+            border-color: #f4d03f;
+        }
 
-            /* Era-specific themes */
-            .era-early {
-                --primary-bg: #D4AF37;
-                --secondary-bg: #0F0F0F;
-                --tertiary-bg: #FFFFF0;
-                --text-color: #0F0F0F;
-                --heading-color: #8B4513;
-                --accent-color: #90EE90;
-            }
+        .mode-btn.active {
+            background: rgba(244, 208, 63, 0.2);
+            border-color: #f4d03f;
+            color: #f4d03f;
+        }
 
-            .era-swing {
-                --primary-bg: #6B8E23;
-                --secondary-bg: #8B0000;
-                --tertiary-bg: #F5F5DC;
-                --text-color: #F5F5DC;
-                --heading-color: #8B0000;
-                --accent-color: #F5F5DC;
-            }
+        .search-section {
+            margin-bottom: 30px;
+        }
 
-            .era-classic {
-                --primary-bg: #40E0D0;
-                --secondary-bg: #FFC0CB;
-                --tertiary-bg: #98FB98;
-                --text-color: #2F4F4F;
-                --heading-color: #008B8B;
-                --accent-color: #4B0082;
-            }
+        .search-container {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
 
-            .era-golden {
-                --primary-bg: #FF1493;
-                --secondary-bg: #0080FF;
-                --tertiary-bg: #32CD32;
-                --text-color: #FFFFFF;
-                --heading-color: #FFFF00;
-                --accent-color: #00FFFF;
-            }
+        .search-input {
+            width: 100%;
+            background: rgba(255,255,255,0.05);
+            border: 2px solid rgba(255,255,255,0.2);
+            border-radius: 10px;
+            padding: 15px;
+            font-size: 1.1em;
+            color: var(--text-color);
+            margin-bottom: 15px;
+            font-family: 'Georgia', serif;
+        }
 
-            .era-modern {
-                --primary-bg: #FF10F0;
-                --secondary-bg: #BF00FF;
-                --tertiary-bg: #00FFFF;
-                --text-color: #FFFFFF;
-                --heading-color: #00FF00;
-                --accent-color: #0099FF;
-            }
+        .search-input::placeholder {
+            color: rgba(255,255,255,0.5);
+        }
 
-            .era-contemporary {
-                --primary-bg: #C0C0C0;
-                --secondary-bg: #4F94CD;
-                --tertiary-bg: #00FF32;
-                --text-color: #000000;
-                --heading-color: #9932CC;
-                --accent-color: #FF7F00;
-            }
+        .search-input:focus {
+            outline: none;
+            border-color: #f4d03f;
+            background: rgba(255,255,255,0.1);
+        }
 
-            .era-timeless {
-                --primary-bg: #6A0DAD;
-                --secondary-bg: #39FF14;
-                --tertiary-bg: #FF006E;
-                --text-color: #FFFFFF;
-                --heading-color: #FFD300;
-                --accent-color: #FF8500;
-            }
+        .search-btn {
+            background: linear-gradient(45deg, #8b4513, #d2691e);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1.1em;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            margin: 0 auto;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
 
-            .user-selections-box {
-                background: rgba(255,255,255,0.05);
-                border: 1px solid rgba(255,255,255,0.2);
-                border-radius: 8px;
-                padding: 15px;
-                margin-top: 20px;
-                font-size: 0.9em;
-                color: var(--text-color);
-                text-align: center;
-            }
+        .search-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+        }
 
-            /* Mode selector and search styling */
+        @media (max-width: 600px) {
             .mode-selector {
-                display: flex;
-                justify-content: center;
-                gap: 10px;
-                margin-bottom: 30px;
-                background: rgba(255,255,255,0.1);
-                border-radius: 15px;
-                padding: 10px;
-                backdrop-filter: blur(10px);
+                flex-direction: column;
+                gap: 5px;
             }
-
+            
             .mode-btn {
-                background: rgba(255,255,255,0.05);
-                border: 2px solid transparent;
-                border-radius: 10px;
-                padding: 12px 20px;
-                color: var(--text-color);
-                font-size: 1em;
-                cursor: pointer;
-                transition: all 0.3s ease;
-                flex: 1;
-                max-width: 200px;
+                max-width: none;
             }
-
-            .mode-btn:hover {
-                background: rgba(255,255,255,0.15);
-                border-color: #f4d03f;
-            }
-
-            .mode-btn.active {
-                background: rgba(244, 208, 63, 0.2);
-                border-color: #f4d03f;
-                color: #f4d03f;
-            }
-
-            .search-section {
-                margin-bottom: 30px;
-            }
-
-            .search-container {
-                background: rgba(255,255,255,0.1);
-                border-radius: 15px;
-                padding: 20px;
-                backdrop-filter: blur(10px);
-                border: 1px solid rgba(255,255,255,0.2);
-            }
-
+            
             .search-input {
-                width: 100%;
-                background: rgba(255,255,255,0.05);
-                border: 2px solid rgba(255,255,255,0.2);
-                border-radius: 10px;
-                padding: 15px;
-                font-size: 1.1em;
-                color: var(--text-color);
-                margin-bottom: 15px;
-                font-family: 'Georgia', serif;
+                font-size: 1em;
             }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="vinyl-icon"></div>
+            <h1>Vinyl Collection Selector</h1>
+            <p class="subtitle">Find the perfect album for your mood</p>
+        </div>
 
-            .search-input::placeholder {
-                color: rgba(255,255,255,0.5);
-            }
+        <div id="loading" class="loading">
+            🎵 Loading vinyl collection...
+        </div>
 
-            .search-input:focus {
-                outline: none;
-                border-color: #f4d03f;
-                background: rgba(255,255,255,0.1);
-            }
+        <div id="error" class="error hidden">
+            ❌ Sorry, there was an error loading the vinyl collection. Please make sure the albums.json file is available.
+        </div>
 
-            .search-btn {
-                background: linear-gradient(45deg, #8b4513, #d2691e);
-                color: white;
-                border: none;
-                padding: 12px 30px;
-                font-size: 1.1em;
-                border-radius: 25px;
-                cursor: pointer;
-                transition: all 0.3s ease;
-                display: block;
-                margin: 0 auto;
-                box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            }
+        <div id="mode-selector" class="mode-selector hidden">
+            <button id="mood-mode-btn" class="mode-btn active" onclick="switchToMoodMode()">
+                🎭 Browse by Mood
+            </button>
+            <button id="search-mode-btn" class="mode-btn" onclick="switchToSearchMode()">
+                🔍 Quick Search
+            </button>
+        </div>
 
-            .search-btn:hover {
-                transform: translateY(-2px);
-                box-shadow: 0 8px 25px rgba(0,0,0,0.4);
-            }
-
-            @media (max-width: 600px) {
-                .mode-selector {
-                    flex-direction: column;
-                    gap: 5px;
-                }
-
-                .mode-btn {
-                    max-width: none;
-                }
-
-                .search-input {
-                    font-size: 1em;
-                }
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <div class="header">
-                <div class="vinyl-icon"></div>
-                <h1>Vinyl Collection Selector</h1>
-                <p class="subtitle">Find the perfect album for your mood</p>
-            </div>
-
-            <div id="loading" class="loading">
-                🎵 Loading vinyl collection...
-            </div>
-
-            <div id="error" class="error hidden">
-                ❌ Sorry, there was an error loading the vinyl collection. Please make sure the albums.json file
-     is available.
-            </div>
-
-            <div id="mode-selector" class="mode-selector hidden">
-                <button id="mood-mode-btn" class="mode-btn active" onclick="switchToMoodMode()">
-                    🎭 Browse by Mood
+        <div id="search-section" class="search-section hidden">
+            <div class="search-container">
+                <input type="text" id="search-input" class="search-input" placeholder="Search: 'Jazz AND 1972' or 'Rock OR Blues' or 'Folk NOT Country'" />
+                <button id="search-btn" class="search-btn" onclick="performSearch()">
+                    🔍 Search
                 </button>
-                <button id="search-mode-btn" class="mode-btn" onclick="switchToSearchMode()">
-                    🔍 Quick Search
+                <button id="export-all-btn" class="search-btn" onclick="exportAllToCSV()" style="margin-top: 10px; background: linear-gradient(45deg, #2c5530, #4a7c59);">
+                    📄 Export All Albums to CSV
                 </button>
-            </div>
-
-            <div id="search-section" class="search-section hidden">
-                <div class="search-container">
-                    <input type="text" id="search-input" class="search-input" placeholder="Search: 'Jazz AND
-    1972' or 'Rock OR Blues' or 'Folk NOT Country'" />
-                    <button id="search-btn" class="search-btn" onclick="performSearch()">
-                        🔍 Search
-                    </button>
-                </div>
-            </div>
-
-            <div id="questionnaire" class="hidden">
-                <div class="question-card">
-                    <div class="question">What's your current mood?</div>
-                    <div class="options">
-                        <div class="option" data-question="mood" data-value="energetic">🔥 Energetic &
-    Upbeat</div>
-                        <div class="option" data-question="mood" data-value="relaxed">😌 Relaxed & Chill</div>
-                        <div class="option" data-question="mood" data-value="nostalgic">💭 Nostalgic &
-    Reflective</div>
-                        <div class="option" data-question="mood" data-value="adventurous">🎭 Adventurous &
-    Experimental</div>
-                    </div>
-                </div>
-
-                <div class="question-card">
-                    <div class="question">What genre speaks to you right now?</div>
-                    <div class="options">
-                        <div class="option" data-question="genre" data-value="rock">🎸 Rock & Metal</div>
-                        <div class="option" data-question="genre" data-value="jazz">🎺 Jazz & Swing</div>
-                        <div class="option" data-question="genre" data-value="pop">🎤 Pop & Soft Rock</div>
-                        <div class="option" data-question="genre" data-value="disco">🕺 Disco & Funk</div>
-                        <div class="option" data-question="genre" data-value="soul">💫 Soul & R&B</div>
-                        <div class="option" data-question="genre" data-value="country">🤠 Country & Folk</div>
-                        <div class="option" data-question="genre" data-value="easy">🎼 Easy Listening &
-    Vocals</div>
-                        <div class="option" data-question="genre" data-value="newwave">🌊 New Wave &
-    Alternative</div>
-                        <div class="option" data-question="genre" data-value="surprise">🎲 Surprise Me!</div>
-                    </div>
-                </div>
-
-                <div class="question-card">
-                    <div class="question">What era calls to you?</div>
-                    <div class="options">
-                        <div class="option" data-question="era" data-value="early">🎭 Early Vintage
-    (1920s-1934)</div>
-                        <div class="option" data-question="era" data-value="swing">🎺 Big Band/Swing
-    (1935-1940s)</div>
-                        <div class="option" data-question="era" data-value="classic">🕰️ Classic
-    (1950s-1964)</div>
-                        <div class="option" data-question="era" data-value="golden">✨ Golden Age
-    (1965-1970s)</div>
-                        <div class="option" data-question="era" data-value="modern">🌟 Modern
-    (1980s-1990s)</div>
-                        <div class="option" data-question="era" data-value="contemporary">💿 Contemporary
-    (2000s+)</div>
-                        <div class="option" data-question="era" data-value="timeless">⭐ Era Doesn't
-    Matter</div>
-                    </div>
-                </div>
-
-                <div class="question-card">
-                    <div class="question">Are you looking for...</div>
-                    <div class="options">
-                        <div class="option" data-question="familiarity" data-value="familiar">👑 A Classic
-    Hit</div>
-                        <div class="option" data-question="familiarity" data-value="discovery">🔍 Something New
-    to Discover</div>
-                        <div class="option" data-question="familiarity" data-value="either">🎯 Either is
-    Fine</div>
-                    </div>
-                </div>
-
-                <button class="get-recommendation" onclick="getRecommendations()" disabled>
-                    🎵 Get My Recommendations
-                </button>
-            </div>
-
-            <div id="results" class="hidden">
-                <div class="recommendations">
-                    <h2 style="color: var(--heading-color); text-align: center; margin-bottom: 30px; font-size:
-    2em;">🎵 Perfect Picks for You</h2>
-                    <div id="recommendation-list"></div>
-                    <button class="reset-button" onclick="resetQuiz()">🔄 Try Again</button>
-                    <div id="user-selections" class="user-selections-box"></div>
-                </div>
             </div>
         </div>
 
-        <script>
-            // Global variables
-            let vinylCollection = [];
-            let userPreferences = {};
+        <div id="questionnaire" class="hidden">
+            <div class="question-card">
+                <div class="question">What's your current mood?</div>
+                <div class="options">
+                    <div class="option" data-question="mood" data-value="energetic">🔥 Energetic & Upbeat</div>
+                    <div class="option" data-question="mood" data-value="relaxed">😌 Relaxed & Chill</div>
+                    <div class="option" data-question="mood" data-value="nostalgic">💭 Nostalgic & Reflective</div>
+                    <div class="option" data-question="mood" data-value="adventurous">🎭 Adventurous & Experimental</div>
+                </div>
+            </div>
 
-            // Load vinyl collection from JSON file
-            async function loadVinylCollection() {
-                try {
-                    const response = await fetch('albums.json');
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-                    const data = await response.json();
-                    vinylCollection = data;
+            <div class="question-card">
+                <div class="question">What genre speaks to you right now?</div>
+                <div class="options">
+                    <div class="option" data-question="genre" data-value="rock">🎸 Rock & Metal</div>
+                    <div class="option" data-question="genre" data-value="jazz">🎺 Jazz & Swing</div>
+                    <div class="option" data-question="genre" data-value="pop">🎤 Pop & Soft Rock</div>
+                    <div class="option" data-question="genre" data-value="disco">🕺 Disco & Funk</div>
+                    <div class="option" data-question="genre" data-value="soul">💫 Soul & Blues</div>
+                    <div class="option" data-question="genre" data-value="country">🤠 Country & Folk</div>
+                    <div class="option" data-question="genre" data-value="easy">🎼 Easy Listening & Vocals</div>
+                    <div class="option" data-question="genre" data-value="newwave">🌊 New Wave & Alternative</div>
+                    <div class="option" data-question="genre" data-value="surprise">🎲 Surprise Me!</div>
+                </div>
+            </div>
 
-                    // Hide loading, show mode selector and questionnaire
-                    document.getElementById('loading').classList.add('hidden');
-                    document.getElementById('mode-selector').classList.remove('hidden');
-                    document.getElementById('questionnaire').classList.remove('hidden');
+            <div class="question-card">
+                <div class="question">What era calls to you?</div>
+                <div class="options">
+                    <div class="option" data-question="era" data-value="early">🎭 Early Vintage (1920s-1934)</div>
+                    <div class="option" data-question="era" data-value="swing">🎺 Big Band/Swing (1935-1940s)</div>
+                    <div class="option" data-question="era" data-value="classic">🕰️ Classic (1950s-1964)</div>
+                    <div class="option" data-question="era" data-value="golden">✨ Golden Age (1965-1970s)</div>
+                    <div class="option" data-question="era" data-value="modern">🌟 Modern (1980s-1990s)</div>
+                    <div class="option" data-question="era" data-value="contemporary">💿 Contemporary (2000s+)</div>
+                    <div class="option" data-question="era" data-value="timeless">⭐ Era Doesn't Matter</div>
+                </div>
+            </div>
 
-                    console.log(`Loaded ${vinylCollection.length} albums from albums.json`);
-                } catch (error) {
-                    console.error('Error loading vinyl collection:', error);
-                    document.getElementById('loading').classList.add('hidden');
-                    document.getElementById('error').classList.remove('hidden');
+            <div class="question-card">
+                <div class="question">Are you looking for...</div>
+                <div class="options">
+                    <div class="option" data-question="familiarity" data-value="familiar">👑 A Classic Hit</div>
+                    <div class="option" data-question="familiarity" data-value="discovery">🔍 Something New to Discover</div>
+                    <div class="option" data-question="familiarity" data-value="either">🎯 Either is Fine</div>
+                </div>
+            </div>
+
+            <button class="get-recommendation" onclick="getRecommendations()" disabled>
+                🎵 Get My Recommendations
+            </button>
+        </div>
+
+        <div id="results" class="hidden">
+            <div class="recommendations">
+                <h2 style="color: var(--heading-color); text-align: center; margin-bottom: 30px; font-size: 2em;">🎵 Perfect Picks for You</h2>
+                <div id="recommendation-list"></div>
+                <button class="reset-button" onclick="resetQuiz()">🔄 Try Again</button>
+                <div id="user-selections" class="user-selections-box"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global variables
+        let vinylCollection = [];
+        let userPreferences = {};
+
+        // Load vinyl collection from JSON file
+        async function loadVinylCollection() {
+            try {
+                const response = await fetch('albums.json');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
                 }
+                const data = await response.json();
+                vinylCollection = data;
+                
+                // Hide loading, show mode selector and questionnaire
+                document.getElementById('loading').classList.add('hidden');
+                document.getElementById('mode-selector').classList.remove('hidden');
+                document.getElementById('questionnaire').classList.remove('hidden');
+                
+                console.log(`Loaded ${vinylCollection.length} albums from albums.json`);
+            } catch (error) {
+                console.error('Error loading vinyl collection:', error);
+                document.getElementById('loading').classList.add('hidden');
+                document.getElementById('error').classList.remove('hidden');
             }
+        }
 
-            // Initialize the app when page loads
-            document.addEventListener('DOMContentLoaded', function() {
-                loadVinylCollection();
-            });
+        // Initialize the app when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            loadVinylCollection();
+        });
 
-            // Handle option selection
-            document.addEventListener('click', function(e) {
-                if (e.target.classList.contains('option')) {
-                    const question = e.target.dataset.question;
-                    const value = e.target.dataset.value;
-
-                    // Remove selection from other options in the same question
-                    const otherOptions = document.querySelectorAll(`[data-question="${question}"]`);
-                    otherOptions.forEach(option => option.classList.remove('selected'));
-
-                    // Add selection to clicked option
-                    e.target.classList.add('selected');
-
-                    // Store preference
-                    userPreferences[question] = value;
-
-                    // Check if all questions are answered
-                    checkAllAnswered();
-                }
-            });
-
-            function checkAllAnswered() {
-                const requiredQuestions = ['mood', 'genre', 'era', 'familiarity'];
-                const answered = requiredQuestions.every(q => userPreferences[q]);
-
-                const button = document.querySelector('.get-recommendation');
-                button.disabled = !answered;
-
-                if (answered) {
-                    button.style.background = 'linear-gradient(45deg, #8b4513, #d2691e)';
-                    button.style.cursor = 'pointer';
-                }
+        // Handle option selection
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('option')) {
+                const question = e.target.dataset.question;
+                const value = e.target.dataset.value;
+                
+                // Remove selection from other options in the same question
+                const otherOptions = document.querySelectorAll(`[data-question="${question}"]`);
+                otherOptions.forEach(option => option.classList.remove('selected'));
+                
+                // Add selection to clicked option
+                e.target.classList.add('selected');
+                
+                // Store preference
+                userPreferences[question] = value;
+                
+                // Check if all questions are answered
+                checkAllAnswered();
             }
+        });
 
-            function getRecommendations() {
-                if (vinylCollection.length === 0) {
-                    alert('Vinyl collection not loaded yet. Please try again.');
-                    return;
-                }
-
-                const recommendations = findMatches();
-                displayRecommendations(recommendations);
+        function checkAllAnswered() {
+            const requiredQuestions = ['mood', 'genre', 'era', 'familiarity'];
+            const answered = requiredQuestions.every(q => userPreferences[q]);
+            
+            const button = document.querySelector('.get-recommendation');
+            button.disabled = !answered;
+            
+            if (answered) {
+                button.style.background = 'linear-gradient(45deg, #8b4513, #d2691e)';
+                button.style.cursor = 'pointer';
             }
+        }
 
-            function findMatches() {
-                let scored = vinylCollection.map(album => ({
-                    ...album,
-                    score: calculateScore(album)
-                }));
-
-                // Sort by score and return top 3
-                scored.sort((a, b) => b.score - a.score);
-                return scored.slice(0, 3);
+        function getRecommendations() {
+            if (vinylCollection.length === 0) {
+                alert('Vinyl collection not loaded yet. Please try again.');
+                return;
             }
+            
+            const recommendations = findMatches();
+            displayRecommendations(recommendations);
+        }
 
-            function calculateScore(album) {
-                let score = 0;
-                const prefs = userPreferences;
+        function findMatches() {
+            let scored = vinylCollection.map(album => ({
+                ...album,
+                score: calculateScore(album)
+            }));
 
-                // Genre matching - updated to reflect actual collection structure
-                if (prefs.genre !== 'surprise') {
-                    const genreMap = {
-                        'rock': [
-                            'Rock', 'Hard Rock', 'Heavy Metal',
-                            'Progressive Rock', 'Blues Rock', 'Indie Rock'
-                        ],
-                        'jazz': [
-                            'Jazz', 'Jazz/Swing', 'Big Band/Swing',
-                            'Bossa Nova', 'Latin Jazz', 'Jazz Rock',
-                            'Jazz/Soul', 'Soul/Jazz', 'Vocal Jazz'
-                        ],
-                        'pop': [
-                            'Pop', 'Soft Rock', 'Pop/Rock',
-                            'Synth-pop', 'Rock/Pop'
-                        ],
-                        'disco': [
-                            'Disco/Funk', 'Disco/R&B',
-                            'Classical/Disco', 'Pop/Dance'
-                        ],
-                        'soul': [
-                            'Soul/R&B', 'R&B/Soul',
-                            'Soul/Jazz', 'Jazz/Soul'
-                        ],
-                        'country': [
-                            'Country', 'Folk Rock', 'Gospel',
-                            'Country/Pop', 'Folk/Pop'
-                        ],
-                        'easy': [
-                            'Easy Listening', 'Vocal Jazz', 'Orchestral',
-                            'Easy Listening/Pop', 'Vocal/Pop', 'Vocal Pop',
-                            'Orchestral/Easy Listening', 'Pop/Easy Listening',
-                            'Hawaiian/Easy Listening'
-                        ],
-                        'newwave': [
-                            'New Wave/Pop', 'New Wave/Rock',
-                            'Indie Rock', 'Soul/Psychedelic Rock'
-                        ]
-                    };
+            // Sort by score and return top 3
+            scored.sort((a, b) => b.score - a.score);
+            return scored.slice(0, 3);
+        }
 
-                    const targetGenres = genreMap[prefs.genre] || [];
-                    if (targetGenres.some(g => album.genre.toLowerCase().includes(g.toLowerCase()))) {
-                        score += 3;
-                    }
-                } else {
-                    score += 1; // Small bonus for surprise selection
-                }
+        function calculateScore(album) {
+            let score = 0;
+            const prefs = userPreferences;
 
-                // Era matching - clean boundaries with no overlaps
-                const year = parseInt(album.year) || 1970;
-                if (prefs.era === 'early' && year >= 1920 && year <= 1934) score += 2;
-                if (prefs.era === 'swing' && year >= 1935 && year <= 1949) score += 2;
-                if (prefs.era === 'classic' && year >= 1950 && year <= 1964) score += 2;
-                if (prefs.era === 'golden' && year >= 1965 && year <= 1979) score += 2;
-                if (prefs.era === 'modern' && year >= 1980 && year <= 1999) score += 2;
-                if (prefs.era === 'contemporary' && year >= 2000) score += 2;
-                if (prefs.era === 'timeless') score += 1;
-
-                // Mood matching - updated for new genre structure
-                const moodMap = {
-                    'energetic': [
-                        'Rock', 'Hard Rock', 'Heavy Metal',
-                        'Disco/Funk', 'Disco/R&B', 'New Wave',
-                        'Progressive Rock', 'Pop/Dance'
+            // Genre matching - updated to reflect actual collection structure
+            if (prefs.genre !== 'surprise') {
+                const genreMap = {
+                    'rock': [
+                        'Rock', 'Hard Rock', 'Heavy Metal', 
+                        'Progressive Rock', 'Blues Rock', 'Indie Rock'
                     ],
-                    'relaxed': [
-                        'Easy Listening', 'Jazz', 'Soft Rock',
-                        'Vocal Jazz', 'Orchestral', 'Hawaiian/Easy Listening',
-                        'Bossa Nova', 'Jazz/Swing'
+                    'jazz': [
+                        'Jazz', 'Jazz/Swing', 'Big Band/Swing', 
+                        'Bossa Nova', 'Latin Jazz', 'Jazz Rock', 
+                        'Jazz/Soul', 'Soul/Jazz', 'Vocal Jazz'
                     ],
-                    'nostalgic': [
-                        'Country', 'Folk Rock', 'Gospel',
-                        'Big Band/Swing', 'Vocal Pop', 'Folk/Pop'
+                    'pop': [
+                        'Pop', 'Soft Rock', 'Pop/Rock', 
+                        'Synth-pop', 'Rock/Pop'
                     ],
-                    'adventurous': [
-                        'Progressive Rock', 'New Wave', 'Jazz Rock',
-                        'Soul/Psychedelic Rock', 'Indie Rock', 'Latin Jazz'
+                    'disco': [
+                        'Disco/Funk', 'Disco/R&B', 
+                        'Classical/Disco', 'Pop/Dance'
+                    ],
+                    'soul': [
+                        'Soul/R&B', 'R&B/Soul', 'Blues', 'Blues Rock',
+                        'Soul/Jazz', 'Jazz/Soul'
+                    ],
+                    'country': [
+                        'Country', 'Folk Rock', 'Gospel', 
+                        'Country/Pop', 'Folk/Pop'
+                    ],
+                    'easy': [
+                        'Easy Listening', 'Vocal Jazz', 'Orchestral', 
+                        'Easy Listening/Pop', 'Vocal/Pop', 'Vocal Pop', 
+                        'Orchestral/Easy Listening', 'Pop/Easy Listening', 
+                        'Hawaiian/Easy Listening'
+                    ],
+                    'newwave': [
+                        'New Wave/Pop', 'New Wave/Rock', 
+                        'Indie Rock', 'Soul/Psychedelic Rock'
                     ]
                 };
-
-                const moodGenres = moodMap[prefs.mood] || [];
-                if (moodGenres.some(g => album.genre.toLowerCase().includes(g.toLowerCase()))) {
-                    score += 2;
+                
+                const targetGenres = genreMap[prefs.genre] || [];
+                if (targetGenres.some(g => album.genre.toLowerCase().includes(g.toLowerCase()))) {
+                    score += 3;
                 }
-
-                // Familiarity bonus - artists from actual collection
-                const popularArtists = [
-                    'Michael Jackson', 'Heart', 'Hall & Oates', 'Fleetwood Mac', 'Iron Maiden',
-                    'David Bowie', 'Electric Light Orchestra', 'Genesis', 'Deep Purple', 'The Cars',
-                    'Huey Lewis and the News', 'Peter Frampton', 'Johnny Cash', 'Louis Armstrong',
-                    'Carpenters', 'Neil Diamond', 'Pat Benatar', 'Led Zeppelin', 'Queen', 'The Who',
-                    'Pink Floyd', 'Paul McCartney', 'John Lennon', 'Elvis Presley', 'Bruce Springsteen',
-                    'Stevie Wonder', 'Neil Young', 'Bob Marley', 'Madonna', 'Journey', 'Kansas',
-                    'Billy Joel', 'Elton John', 'Van Morrison', 'Simon and Garfunkel', 'Donna Summer',
-                    'James Taylor', 'Cat Stevens', 'Linda Ronstadt', 'Steely Dan', 'Yes', 'The Moody Blues'
-                ];
-                if (prefs.familiarity === 'familiar' && popularArtists.some(a => album.artist.includes(a))) {
-                    score += 1;
-                }
-
-                // Add some randomness for variety
-                score += Math.random() * 0.5;
-
-                return score;
+            } else {
+                score += 1; // Small bonus for surprise selection
             }
 
-            function displayRecommendations(recommendations) {
-                const questionnaire = document.getElementById('questionnaire');
-                const results = document.getElementById('results');
-                const list = document.getElementById('recommendation-list');
+            // Era matching - clean boundaries with no overlaps
+            const year = parseInt(album.year) || 1970;
+            if (prefs.era === 'early' && year >= 1920 && year <= 1934) score += 2;
+            if (prefs.era === 'swing' && year >= 1935 && year <= 1949) score += 2;
+            if (prefs.era === 'classic' && year >= 1950 && year <= 1964) score += 2;
+            if (prefs.era === 'golden' && year >= 1965 && year <= 1979) score += 2;
+            if (prefs.era === 'modern' && year >= 1980 && year <= 1999) score += 2;
+            if (prefs.era === 'contemporary' && year >= 2000) score += 2;
+            if (prefs.era === 'timeless') score += 1;
 
-                questionnaire.classList.add('hidden');
-                results.classList.remove('hidden');
+            // Mood matching - updated for new genre structure
+            const moodMap = {
+                'energetic': [
+                    'Rock', 'Hard Rock', 'Heavy Metal', 
+                    'Disco/Funk', 'Disco/R&B', 'New Wave', 
+                    'Progressive Rock', 'Pop/Dance'
+                ],
+                'relaxed': [
+                    'Easy Listening', 'Jazz', 'Soft Rock', 
+                    'Vocal Jazz', 'Orchestral', 'Hawaiian/Easy Listening', 
+                    'Bossa Nova', 'Jazz/Swing'
+                ],
+                'nostalgic': [
+                    'Country', 'Folk Rock', 'Gospel', 
+                    'Big Band/Swing', 'Vocal Pop', 'Folk/Pop'
+                ],
+                'adventurous': [
+                    'Progressive Rock', 'New Wave', 'Jazz Rock', 
+                    'Soul/Psychedelic Rock', 'Indie Rock', 'Latin Jazz'
+                ]
+            };
 
-                // Apply era theme to body
-                applyEraTheme();
+            const moodGenres = moodMap[prefs.mood] || [];
+            if (moodGenres.some(g => album.genre.toLowerCase().includes(g.toLowerCase()))) {
+                score += 2;
+            }
 
-                list.innerHTML = recommendations.map((album, index) => `
+            // Familiarity bonus - artists from actual collection
+            const popularArtists = [
+                'Michael Jackson', 'Heart', 'Hall & Oates', 'Fleetwood Mac', 'Iron Maiden',
+                'David Bowie', 'Electric Light Orchestra', 'Genesis', 'Deep Purple', 'The Cars',
+                'Huey Lewis and the News', 'Peter Frampton', 'Johnny Cash', 'Louis Armstrong',
+                'Carpenters', 'Neil Diamond', 'Pat Benatar', 'Led Zeppelin', 'Queen', 'The Who',
+                'Pink Floyd', 'Paul McCartney', 'John Lennon', 'Elvis Presley', 'Bruce Springsteen',
+                'Stevie Wonder', 'Neil Young', 'Bob Marley', 'Madonna', 'Journey', 'Kansas',
+                'Billy Joel', 'Elton John', 'Van Morrison', 'Simon and Garfunkel', 'Donna Summer',
+                'James Taylor', 'Cat Stevens', 'Linda Ronstadt', 'Steely Dan', 'Yes', 'The Moody Blues'
+            ];
+            if (prefs.familiarity === 'familiar' && popularArtists.some(a => album.artist.includes(a))) {
+                score += 1;
+            }
+
+            // Add some randomness for variety
+            score += Math.random() * 0.5;
+
+            return score;
+        }
+
+        function displayRecommendations(recommendations) {
+            const questionnaire = document.getElementById('questionnaire');
+            const results = document.getElementById('results');
+            const list = document.getElementById('recommendation-list');
+
+            questionnaire.classList.add('hidden');
+            results.classList.remove('hidden');
+            
+            // Apply era theme to body
+            applyEraTheme();
+
+            list.innerHTML = recommendations.map((album, index) => `
+                <div class="recommendation-item">
+                    <div class="album-title">${album.album}</div>
+                    <div class="artist-name">by ${album.artist}</div>
+                    <div class="album-details">${album.year} • ${album.genre}</div>
+                    <div class="fun-fact">💡 ${album.funFact}</div>
+                </div>
+            `).join('');
+
+            // Show user selections
+            displayUserSelections();
+
+            // Scroll to results
+            results.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function applyEraTheme() {
+            const era = userPreferences.era;
+            const body = document.body;
+            
+            // Remove any existing era classes
+            body.classList.remove('era-early', 'era-swing', 'era-classic', 'era-golden', 'era-modern', 'era-contemporary', 'era-timeless');
+            
+            // Add the appropriate era class
+            if (era) {
+                body.classList.add(`era-${era}`);
+            }
+        }
+
+        function displayUserSelections() {
+            const selectionBox = document.getElementById('user-selections');
+            
+            // Define label mappings
+            const labels = {
+                mood: {
+                    'energetic': 'Energetic & Upbeat',
+                    'relaxed': 'Relaxed & Chill',
+                    'nostalgic': 'Nostalgic & Reflective',
+                    'adventurous': 'Adventurous & Experimental'
+                },
+                genre: {
+                    'rock': 'Rock & Metal',
+                    'jazz': 'Jazz & Swing',
+                    'pop': 'Pop & Soft Rock',
+                    'disco': 'Disco & Funk',
+                    'soul': 'Soul & Blues',
+                    'country': 'Country & Folk',
+                    'easy': 'Easy Listening & Vocals',
+                    'newwave': 'New Wave & Alternative',
+                    'surprise': 'Surprise Me!'
+                },
+                era: {
+                    'early': 'Early Vintage (1920s-1934)',
+                    'swing': 'Big Band/Swing (1935-1940s)',
+                    'classic': 'Classic (1950s-1964)',
+                    'golden': 'Golden Age (1965-1970s)',
+                    'modern': 'Modern (1980s-1990s)',
+                    'contemporary': 'Contemporary (2000s+)',
+                    'timeless': 'Era Doesn\'t Matter'
+                },
+                familiarity: {
+                    'familiar': 'A Classic Hit',
+                    'discovery': 'Something New to Discover',
+                    'either': 'Either is Fine'
+                }
+            };
+
+            // Build the selections string
+            const selections = [
+                labels.mood[userPreferences.mood],
+                labels.genre[userPreferences.genre],
+                labels.era[userPreferences.era],
+                labels.familiarity[userPreferences.familiarity]
+            ].filter(Boolean).join(' • ');
+
+            selectionBox.innerHTML = `<strong>Your selections:</strong> ${selections}`;
+        }
+
+        // Mode switching functions
+        function switchToMoodMode() {
+            // Update button states
+            document.getElementById('mood-mode-btn').classList.add('active');
+            document.getElementById('search-mode-btn').classList.remove('active');
+            
+            // Show questionnaire, hide search
+            document.getElementById('questionnaire').classList.remove('hidden');
+            document.getElementById('search-section').classList.add('hidden');
+            
+            // Hide any search results
+            document.getElementById('results').classList.add('hidden');
+            
+            // Remove any era themes (since search doesn't use them)
+            document.body.classList.remove('era-early', 'era-swing', 'era-classic', 'era-golden', 'era-modern', 'era-contemporary', 'era-timeless');
+        }
+
+        function switchToSearchMode() {
+            // Update button states
+            document.getElementById('search-mode-btn').classList.add('active');
+            document.getElementById('mood-mode-btn').classList.remove('active');
+            
+            // Show search, hide questionnaire
+            document.getElementById('search-section').classList.remove('hidden');
+            document.getElementById('questionnaire').classList.add('hidden');
+            
+            // Hide any mood-based results
+            document.getElementById('results').classList.add('hidden');
+            
+            // Focus on search input for better UX
+            document.getElementById('search-input').focus();
+        }
+
+        function performSearch() {
+            const searchTerm = document.getElementById('search-input').value.trim();
+            if (!searchTerm) {
+                alert('Please enter a search term');
+                return;
+            }
+            
+            if (vinylCollection.length === 0) {
+                alert('Vinyl collection not loaded yet. Please try again.');
+                return;
+            }
+            
+            // Perform basic search across all fields
+            const searchResults = basicSearch(searchTerm);
+            displaySearchResults(searchResults, searchTerm);
+        }
+
+        function basicSearch(searchTerm) {
+            // Check if search term contains Boolean operators
+            if (containsBooleanOperators(searchTerm)) {
+                return booleanSearch(searchTerm);
+            }
+            
+            // Configure Fuse.js for fuzzy search
+            const fuseOptions = {
+                threshold: 0.25,  // Optimal threshold for typo tolerance without too many results
+                keys: [
+                    'album',
+                    'artist', 
+                    'year',
+                    'genre'
+                ],
+                includeScore: true,
+                minMatchCharLength: 2
+            };
+            
+            const fuse = new Fuse(vinylCollection, fuseOptions);
+            const results = fuse.search(searchTerm);
+            
+            // Extract the actual album objects from Fuse results
+            return results.map(result => result.item);
+        }
+
+        function containsBooleanOperators(searchTerm) {
+            return /\s+(AND|OR|NOT)\s+/i.test(searchTerm);
+        }
+
+        function booleanSearch(searchTerm) {
+            // Parse the search term into components
+            const parsedQuery = parseBooleanQuery(searchTerm);
+            
+            // Execute the Boolean search
+            return executeBooleanSearch(parsedQuery);
+        }
+
+        function parseBooleanQuery(query) {
+            // Simple parser for AND/OR/NOT operations
+            // Split by operators while preserving them
+            const tokens = query.split(/\s+(AND|OR|NOT)\s+/i);
+            const parsed = [];
+            
+            for (let i = 0; i < tokens.length; i++) {
+                const token = tokens[i].trim();
+                if (token.match(/^(AND|OR|NOT)$/i)) {
+                    parsed.push({ type: 'operator', value: token.toUpperCase() });
+                } else if (token) {
+                    parsed.push({ type: 'term', value: token });
+                }
+            }
+            
+            return parsed;
+        }
+
+        function executeBooleanSearch(parsedQuery) {
+            if (parsedQuery.length === 0) return [];
+            
+            // Start with the first term
+            let results = fuzzySearchTerm(parsedQuery[0].value);
+            
+            // Process each operator and term pair
+            for (let i = 1; i < parsedQuery.length; i += 2) {
+                const operator = parsedQuery[i];
+                const term = parsedQuery[i + 1];
+                
+                if (!operator || !term) continue;
+                
+                const termResults = fuzzySearchTerm(term.value);
+                
+                switch (operator.value) {
+                    case 'AND':
+                        results = results.filter(album => 
+                            termResults.some(termAlbum => termAlbum.id === album.id)
+                        );
+                        break;
+                    case 'OR':
+                        // Add unique results from termResults
+                        const uniqueResults = termResults.filter(termAlbum => 
+                            !results.some(album => album.id === termAlbum.id)
+                        );
+                        results = results.concat(uniqueResults);
+                        break;
+                    case 'NOT':
+                        results = results.filter(album => 
+                            !termResults.some(termAlbum => termAlbum.id === album.id)
+                        );
+                        break;
+                }
+            }
+            
+            // Sort results by relevance (year descending, then alphabetically by artist)
+            results.sort((a, b) => {
+                // First sort by year (newer first)
+                const yearA = parseInt(a.year) || 0;
+                const yearB = parseInt(b.year) || 0;
+                if (yearA !== yearB) return yearB - yearA;
+                
+                // Then sort by artist name alphabetically
+                return a.artist.localeCompare(b.artist);
+            });
+            
+            return results;
+        }
+
+        function fuzzySearchTerm(term) {
+            // Check if term is a 4-digit year - if so, use exact matching
+            if (/^\d{4}$/.test(term)) {
+                return vinylCollection.filter(album => album.year === term);
+            }
+            
+            const fuseOptions = {
+                threshold: 0.25,
+                keys: ['album', 'artist', 'year', 'genre'],
+                includeScore: true,
+                minMatchCharLength: 2
+            };
+            
+            const fuse = new Fuse(vinylCollection, fuseOptions);
+            const results = fuse.search(term);
+            
+            return results.map(result => result.item);
+        }
+
+        function displaySearchResults(results, searchTerm) {
+            const questionnaire = document.getElementById('questionnaire');
+            const resultsDiv = document.getElementById('results');
+            const list = document.getElementById('recommendation-list');
+            const userSelections = document.getElementById('user-selections');
+
+            // Hide questionnaire, show results
+            questionnaire.classList.add('hidden');
+            resultsDiv.classList.remove('hidden');
+            
+            // Update heading for search results
+            const heading = resultsDiv.querySelector('h2');
+            heading.innerHTML = `🔍 Search Results for "${searchTerm}"`;
+            
+            // Display results in card format
+            if (results.length === 0) {
+                list.innerHTML = `
+                    <div class="recommendation-item">
+                        <div class="album-title">No albums found</div>
+                        <div class="artist-name">Try a different search term or check your spelling</div>
+                    </div>
+                `;
+            } else {
+                list.innerHTML = results.map((album, index) => `
                     <div class="recommendation-item">
                         <div class="album-title">${album.album}</div>
                         <div class="artist-name">by ${album.artist}</div>
                         <div class="album-details">${album.year} • ${album.genre}</div>
-                        <div class="fun-fact">💡 ${album.funFact}</div>
                     </div>
                 `).join('');
-
-                // Show user selections
-                displayUserSelections();
-
-                // Scroll to results
-                results.scrollIntoView({ behavior: 'smooth' });
             }
+            
+            // Show search summary with export option
+            userSelections.innerHTML = `
+                <strong>Found ${results.length} album(s) matching "${searchTerm}"</strong>
+                <button onclick="exportSearchResultsToCSV('${searchTerm.replace(/'/g, "\\'")}')" style="
+                    margin-left: 15px; 
+                    background: linear-gradient(45deg, #2c5530, #4a7c59); 
+                    color: white; 
+                    border: none; 
+                    padding: 8px 15px; 
+                    border-radius: 15px; 
+                    cursor: pointer; 
+                    font-size: 0.9em;
+                ">📄 Export Results to CSV</button>
+            `;
+            
+            // Scroll to results
+            resultsDiv.scrollIntoView({ behavior: 'smooth' });
+        }
 
-            function applyEraTheme() {
-                const era = userPreferences.era;
-                const body = document.body;
-
-                // Remove any existing era classes
-                body.classList.remove('era-early', 'era-swing', 'era-classic', 'era-golden', 'era-modern',
-    'era-contemporary', 'era-timeless');
-
-                // Add the appropriate era class
-                if (era) {
-                    body.classList.add(`era-${era}`);
-                }
-            }
-
-            function displayUserSelections() {
-                const selectionBox = document.getElementById('user-selections');
-
-                // Define label mappings
-                const labels = {
-                    mood: {
-                        'energetic': 'Energetic & Upbeat',
-                        'relaxed': 'Relaxed & Chill',
-                        'nostalgic': 'Nostalgic & Reflective',
-                        'adventurous': 'Adventurous & Experimental'
-                    },
-                    genre: {
-                        'rock': 'Rock & Metal',
-                        'jazz': 'Jazz & Swing',
-                        'pop': 'Pop & Soft Rock',
-                        'disco': 'Disco & Funk',
-                        'soul': 'Soul & R&B',
-                        'country': 'Country & Folk',
-                        'easy': 'Easy Listening & Vocals',
-                        'newwave': 'New Wave & Alternative',
-                        'surprise': 'Surprise Me!'
-                    },
-                    era: {
-                        'early': 'Early Vintage (1920s-1934)',
-                        'swing': 'Big Band/Swing (1935-1940s)',
-                        'classic': 'Classic (1950s-1964)',
-                        'golden': 'Golden Age (1965-1970s)',
-                        'modern': 'Modern (1980s-1990s)',
-                        'contemporary': 'Contemporary (2000s+)',
-                        'timeless': 'Era Doesn\'t Matter'
-                    },
-                    familiarity: {
-                        'familiar': 'A Classic Hit',
-                        'discovery': 'Something New to Discover',
-                        'either': 'Either is Fine'
+        // Allow Enter key to trigger search
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('search-input');
+            if (searchInput) {
+                searchInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        performSearch();
                     }
-                };
-
-                // Build the selections string
-                const selections = [
-                    labels.mood[userPreferences.mood],
-                    labels.genre[userPreferences.genre],
-                    labels.era[userPreferences.era],
-                    labels.familiarity[userPreferences.familiarity]
-                ].filter(Boolean).join(' • ');
-
-                selectionBox.innerHTML = `<strong>Your selections:</strong> ${selections}`;
+                });
             }
+        });
 
-            // Mode switching functions
-            function switchToMoodMode() {
-                // Update button states
-                document.getElementById('mood-mode-btn').classList.add('active');
-                document.getElementById('search-mode-btn').classList.remove('active');
-
-                // Show questionnaire, hide search
-                document.getElementById('questionnaire').classList.remove('hidden');
-                document.getElementById('search-section').classList.add('hidden');
-
-                // Hide any search results
-                document.getElementById('results').classList.add('hidden');
-
-                // Remove any era themes (since search doesn't use them)
-                document.body.classList.remove('era-early', 'era-swing', 'era-classic', 'era-golden',
-    'era-modern', 'era-contemporary', 'era-timeless');
-            }
-
-            function switchToSearchMode() {
-                // Update button states
-                document.getElementById('search-mode-btn').classList.add('active');
-                document.getElementById('mood-mode-btn').classList.remove('active');
-
-                // Show search, hide questionnaire
-                document.getElementById('search-section').classList.remove('hidden');
-                document.getElementById('questionnaire').classList.add('hidden');
-
-                // Hide any mood-based results
-                document.getElementById('results').classList.add('hidden');
-
-                // Focus on search input for better UX
-                document.getElementById('search-input').focus();
-            }
-
-            function performSearch() {
-                const searchTerm = document.getElementById('search-input').value.trim();
-                if (!searchTerm) {
-                    alert('Please enter a search term');
-                    return;
-                }
-
-                if (vinylCollection.length === 0) {
-                    alert('Vinyl collection not loaded yet. Please try again.');
-                    return;
-                }
-
-                // Perform basic search across all fields
-                const searchResults = basicSearch(searchTerm);
-                displaySearchResults(searchResults, searchTerm);
-            }
-
-            function basicSearch(searchTerm) {
-                // Check if search term contains Boolean operators
-                if (containsBooleanOperators(searchTerm)) {
-                    return booleanSearch(searchTerm);
-                }
-
-                // Configure Fuse.js for fuzzy search
-                const fuseOptions = {
-                    threshold: 0.25,  // Optimal threshold for typo tolerance without too many results
-                    keys: [
-                        'album',
-                        'artist',
-                        'year',
-                        'genre'
-                    ],
-                    includeScore: true,
-                    minMatchCharLength: 2
-                };
-
-                const fuse = new Fuse(vinylCollection, fuseOptions);
-                const results = fuse.search(searchTerm);
-
-                // Extract the actual album objects from Fuse results
-                return results.map(result => result.item);
-            }
-
-            function containsBooleanOperators(searchTerm) {
-                return /\s+(AND|OR|NOT)\s+/i.test(searchTerm);
-            }
-
-            function booleanSearch(searchTerm) {
-                // Parse the search term into components
-                const parsedQuery = parseBooleanQuery(searchTerm);
-
-                // Execute the Boolean search
-                return executeBooleanSearch(parsedQuery);
-            }
-
-            function parseBooleanQuery(query) {
-                // Simple parser for AND/OR/NOT operations
-                // Split by operators while preserving them
-                const tokens = query.split(/\s+(AND|OR|NOT)\s+/i);
-                const parsed = [];
-
-                for (let i = 0; i < tokens.length; i++) {
-                    const token = tokens[i].trim();
-                    if (token.match(/^(AND|OR|NOT)$/i)) {
-                        parsed.push({ type: 'operator', value: token.toUpperCase() });
-                    } else if (token) {
-                        parsed.push({ type: 'term', value: token });
-                    }
-                }
-
-                return parsed;
-            }
-
-            function executeBooleanSearch(parsedQuery) {
-                if (parsedQuery.length === 0) return [];
-
-                // Start with the first term
-                let results = fuzzySearchTerm(parsedQuery[0].value);
-
-                // Process each operator and term pair
-                for (let i = 1; i < parsedQuery.length; i += 2) {
-                    const operator = parsedQuery[i];
-                    const term = parsedQuery[i + 1];
-
-                    if (!operator || !term) continue;
-
-                    const termResults = fuzzySearchTerm(term.value);
-
-                    switch (operator.value) {
-                        case 'AND':
-                            results = results.filter(album =>
-                                termResults.some(termAlbum => termAlbum.id === album.id)
-                            );
-                            break;
-                        case 'OR':
-                            // Add unique results from termResults
-                            const uniqueResults = termResults.filter(termAlbum =>
-                                !results.some(album => album.id === termAlbum.id)
-                            );
-                            results = results.concat(uniqueResults);
-                            break;
-                        case 'NOT':
-                            results = results.filter(album =>
-                                !termResults.some(termAlbum => termAlbum.id === album.id)
-                            );
-                            break;
-                    }
-                }
-
-                return results;
-            }
-
-            function fuzzySearchTerm(term) {
-             // Check if term is a 4-digit year - if so, use exact matching
-              if (/^\d{4}$/.test(term)) {
-                  return vinylCollection.filter(album => album.year === term);
-                }
-       
-                const fuseOptions = {
-                    threshold: 0.25,
-                    keys: ['album', 'artist', 'year', 'genre'],
-                    includeScore: true,
-                    minMatchCharLength: 2
-                };
-
-                const fuse = new Fuse(vinylCollection, fuseOptions);
-                const results = fuse.search(term);
-
-                return results.map(result => result.item);
-            }
-
-            function displaySearchResults(results, searchTerm) {
-                const questionnaire = document.getElementById('questionnaire');
-                const resultsDiv = document.getElementById('results');
-                const list = document.getElementById('recommendation-list');
-                const userSelections = document.getElementById('user-selections');
-
-                // Hide questionnaire, show results
-                questionnaire.classList.add('hidden');
-                resultsDiv.classList.remove('hidden');
-
-                // Update heading for search results
-                const heading = resultsDiv.querySelector('h2');
-                heading.innerHTML = `🔍 Search Results for "${searchTerm}"`;
-
-                // Display results in card format
-                if (results.length === 0) {
-                    list.innerHTML = `
-                        <div class="recommendation-item">
-                            <div class="album-title">No albums found</div>
-                            <div class="artist-name">Try a different search term or check your spelling</div>
-                        </div>
-                    `;
-                } else {
-                    list.innerHTML = results.map((album, index) => `
-                        <div class="recommendation-item">
-                            <div class="album-title">${album.album}</div>
-                            <div class="artist-name">by ${album.artist}</div>
-                            <div class="album-details">${album.year} • ${album.genre}</div>
-                        </div>
-                    `).join('');
-                }
-
-                // Show search summary instead of user selections
-                userSelections.innerHTML = `<strong>Found ${results.length} album(s) matching
-    "${searchTerm}"</strong>`;
-
-                // Scroll to results
-                resultsDiv.scrollIntoView({ behavior: 'smooth' });
-            }
-
-            // Allow Enter key to trigger search
-            document.addEventListener('DOMContentLoaded', function() {
-                const searchInput = document.getElementById('search-input');
-                if (searchInput) {
-                    searchInput.addEventListener('keypress', function(e) {
-                        if (e.key === 'Enter') {
-                            performSearch();
-                        }
-                    });
-                }
+        function resetQuiz() {
+            userPreferences = {};
+            
+            // Clear all selections
+            document.querySelectorAll('.option').forEach(option => {
+                option.classList.remove('selected');
             });
 
-            function resetQuiz() {
-                userPreferences = {};
+            // Reset button
+            const button = document.querySelector('.get-recommendation');
+            button.disabled = true;
+            button.style.background = '#666';
 
-                // Clear all selections
-                document.querySelectorAll('.option').forEach(option => {
-                    option.classList.remove('selected');
-                });
+            // Show questionnaire, hide results
+            document.getElementById('questionnaire').classList.remove('hidden');
+            document.getElementById('results').classList.add('hidden');
+            
+            // Remove era theme
+            document.body.classList.remove('era-early', 'era-swing', 'era-classic', 'era-golden', 'era-modern', 'era-contemporary', 'era-timeless');
 
-                // Reset button
-                const button = document.querySelector('.get-recommendation');
-                button.disabled = true;
-                button.style.background = '#666';
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
 
-                // Show questionnaire, hide results
-                document.getElementById('questionnaire').classList.remove('hidden');
-                document.getElementById('results').classList.add('hidden');
-
-                // Remove era theme
-                document.body.classList.remove('era-early', 'era-swing', 'era-classic', 'era-golden',
-    'era-modern', 'era-contemporary', 'era-timeless');
-
-                // Scroll to top
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+        // CSV Export Functions
+        function exportAllToCSV() {
+            if (vinylCollection.length === 0) {
+                alert('No albums loaded to export');
+                return;
             }
-        </script>
-    </body>
-    </html>
+            
+            const csv = generateCSV(vinylCollection);
+            downloadCSV(csv, `vinyl_collection_${new Date().toISOString().split('T')[0]}.csv`);
+        }
+
+        function exportSearchResultsToCSV(searchTerm) {
+            const results = document.querySelectorAll('#recommendation-list .recommendation-item');
+            if (results.length === 0) {
+                alert('No search results to export');
+                return;
+            }
+            
+            // Extract albums from current search results display
+            const albums = [];
+            results.forEach(item => {
+                const title = item.querySelector('.album-title')?.textContent || '';
+                const artist = item.querySelector('.artist-name')?.textContent.replace('by ', '') || '';
+                const details = item.querySelector('.album-details')?.textContent || '';
+                const [year, genre] = details.split(' • ');
+                
+                albums.push({
+                    album: title,
+                    artist: artist,
+                    year: year || '',
+                    genre: genre || ''
+                });
+            });
+            
+            const csv = generateCSV(albums);
+            const safeSearchTerm = searchTerm.replace(/[^a-zA-Z0-9]/g, '_');
+            downloadCSV(csv, `search_results_${safeSearchTerm}_${new Date().toISOString().split('T')[0]}.csv`);
+        }
+
+        function generateCSV(albums) {
+            const headers = ['Album', 'Artist', 'Year', 'Genre'];
+            const rows = albums.map(album => [
+                `"${(album.album || '').replace(/"/g, '""')}"`,
+                `"${(album.artist || '').replace(/"/g, '""')}"`,
+                `"${(album.year || '').replace(/"/g, '""')}"`,
+                `"${(album.genre || '').replace(/"/g, '""')}"`
+            ]);
+            
+            return [headers.join(','), ...rows.map(row => row.join(','))].join('\n');
+        }
+
+        function downloadCSV(csvContent, filename) {
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            
+            if (link.download !== undefined) {
+                const url = URL.createObjectURL(blob);
+                link.setAttribute('href', url);
+                link.setAttribute('download', filename);
+                link.style.visibility = 'hidden';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+        }
+    </script>
+</body>
+</html>
