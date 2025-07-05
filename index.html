@@ -898,7 +898,7 @@
             function basicSearch(searchTerm) {
                 // Configure Fuse.js for fuzzy search
                 const fuseOptions = {
-                    threshold: 0.2,  // Tighter threshold for more accurate matches
+                    threshold: 0.35,  // Balanced threshold allowing reasonable typos
                     keys: [
                         'album',
                         'artist',
