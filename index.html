@@ -469,8 +469,8 @@
 
             <div id="search-section" class="search-section hidden">
                 <div class="search-container">
-                    <input type="text" id="search-input" class="search-input" placeholder="Search albums,
-    artists, years, genres... (e.g., 'Jazz AND 1972')" />
+                    <input type="text" id="search-input" class="search-input" placeholder="Search: 'Jazz AND
+    1972' or 'Rock OR Blues' or 'Folk NOT Country'" />
                     <button id="search-btn" class="search-btn" onclick="performSearch()">
                         🔍 Search
                     </button>
@@ -896,9 +896,14 @@
             }
 
             function basicSearch(searchTerm) {
+                // Check if search term contains Boolean operators
+                if (containsBooleanOperators(searchTerm)) {
+                    return booleanSearch(searchTerm);
+                }
+
                 // Configure Fuse.js for fuzzy search
                 const fuseOptions = {
-                    threshold: 0.25,  // Balanced threshold allowing reasonable typos
+                    threshold: 0.25,  // Optimal threshold for typo tolerance without too many results
                     keys: [
                         'album',
                         'artist',
@@ -913,6 +918,89 @@
                 const results = fuse.search(searchTerm);
 
                 // Extract the actual album objects from Fuse results
+                return results.map(result => result.item);
+            }
+
+            function containsBooleanOperators(searchTerm) {
+                return /\s+(AND|OR|NOT)\s+/i.test(searchTerm);
+            }
+
+            function booleanSearch(searchTerm) {
+                // Parse the search term into components
+                const parsedQuery = parseBooleanQuery(searchTerm);
+
+                // Execute the Boolean search
+                return executeBooleanSearch(parsedQuery);
+            }
+
+            function parseBooleanQuery(query) {
+                // Simple parser for AND/OR/NOT operations
+                // Split by operators while preserving them
+                const tokens = query.split(/\s+(AND|OR|NOT)\s+/i);
+                const parsed = [];
+
+                for (let i = 0; i < tokens.length; i++) {
+                    const token = tokens[i].trim();
+                    if (token.match(/^(AND|OR|NOT)$/i)) {
+                        parsed.push({ type: 'operator', value: token.toUpperCase() });
+                    } else if (token) {
+                        parsed.push({ type: 'term', value: token });
+                    }
+                }
+
+                return parsed;
+            }
+
+            function executeBooleanSearch(parsedQuery) {
+                if (parsedQuery.length === 0) return [];
+
+                // Start with the first term
+                let results = fuzzySearchTerm(parsedQuery[0].value);
+
+                // Process each operator and term pair
+                for (let i = 1; i < parsedQuery.length; i += 2) {
+                    const operator = parsedQuery[i];
+                    const term = parsedQuery[i + 1];
+
+                    if (!operator || !term) continue;
+
+                    const termResults = fuzzySearchTerm(term.value);
+
+                    switch (operator.value) {
+                        case 'AND':
+                            results = results.filter(album =>
+                                termResults.some(termAlbum => termAlbum.id === album.id)
+                            );
+                            break;
+                        case 'OR':
+                            // Add unique results from termResults
+                            const uniqueResults = termResults.filter(termAlbum =>
+                                !results.some(album => album.id === termAlbum.id)
+                            );
+                            results = results.concat(uniqueResults);
+                            break;
+                        case 'NOT':
+                            results = results.filter(album =>
+                                !termResults.some(termAlbum => termAlbum.id === album.id)
+                            );
+                            break;
+                    }
+                }
+
+                return results;
+            }
+
+            function fuzzySearchTerm(term) {
+                const fuseOptions = {
+                    threshold: 0.25,
+                    keys: ['album', 'artist', 'year', 'genre'],
+                    includeScore: true,
+                    minMatchCharLength: 2
+                };
+
+                const fuse = new Fuse(vinylCollection, fuseOptions);
+                const results = fuse.search(term);
+
                 return results.map(result => result.item);
             }
 
